@@ -1,12 +1,36 @@
 # First Deploy — Vena to Cloudflare Workers
 
+## Status
+
+| Step | Description | Status |
+|---|---|---|
+| 1 | Fix `wrangler.jsonc` | DONE |
+| 2 | Update `.github/workflows/ci.yml` | DONE |
+| 3 | Manual Gate A: Wrangler CLI login | DONE |
+| 4 | Manual Gate B: Cloudflare API token for CI | DONE |
+| 5 | Manual Gate C: Supabase project configuration | DONE |
+| 6 | Set Workers secrets and deploy | DONE |
+| 7 | Verification | DONE |
+
+## Current file state (as of 2026-05-31)
+
+**`wrangler.jsonc`** — updated 2026-05-31:
+- `name`: `"vena"`
+- `compatibility_flags`: `["nodejs_compat", "disable_nodejs_process_v2"]`
+
+**`.github/workflows/ci.yml`** — updated 2026-05-31:
+- Triggers on `main`
+- `deploy` job added (runs on push to `main`, depends on `ci`)
+
+---
+
 ## Context
 
 First production deployment of Vena. The stack (Astro v6 SSR + @astrojs/cloudflare v13 + Supabase auth) is already configured for Cloudflare Workers in `wrangler.jsonc`. Two bugs in the current config must be fixed before deploying, and the CI/CD pipeline needs to be updated (currently triggers on `master`; canonical branch is `main`). Supabase cloud project is ready with credentials.
 
 ---
 
-## Step 1 — Fix `wrangler.jsonc`
+## Step 1 — Fix `wrangler.jsonc` [DONE]
 
 Two changes:
 
@@ -36,7 +60,7 @@ Result:
 
 ---
 
-## Step 2 — Update `.github/workflows/ci.yml`
+## Step 2 — Update `.github/workflows/ci.yml` [DONE]
 
 Two changes to the existing file:
 1. `branches: [master]` → `branches: [main]` in both `push` and `pull_request` triggers
@@ -94,7 +118,7 @@ jobs:
 
 ---
 
-## Step 3 — Manual Gate A: Wrangler CLI setup (user runs)
+## Step 3 — Manual Gate A: Wrangler CLI setup (user runs) [DONE]
 
 Wrangler is already installed as a dev dependency (`wrangler ^4.90.0` in `package.json`) — no global install needed.
 
@@ -120,7 +144,7 @@ If `whoami` returns an error, re-run `wrangler login`. This must succeed before 
 
 ---
 
-## Step 4 — Manual Gate B: Cloudflare API token for CI (user does in browser)
+## Step 4 — Manual Gate B: Cloudflare API token for CI (user does in browser) [DONE]
 
 This token lets GitHub Actions call `wrangler deploy` without interactive login.
 
@@ -151,7 +175,7 @@ This token lets GitHub Actions call `wrangler deploy` without interactive login.
 
 ---
 
-## Step 5 — Manual Gate C: Supabase project configuration (user does in browser)
+## Step 5 — Manual Gate C: Supabase project configuration (user does in browser) [DONE]
 
 ### 5a — Get your credentials
 
@@ -193,7 +217,9 @@ To check the current sender address: **Authentication** → **Email Templates** 
 
 ---
 
-## Step 6 — Set Workers secrets and deploy (agent executes)
+## Step 6 — Set Workers secrets and deploy (agent executes) [DONE]
+
+Live URL: https://vena.vena-app.workers.dev
 
 After Gates A (wrangler auth confirmed), B (GitHub secrets set), and C (Supabase configured) are all done:
 
@@ -217,7 +243,7 @@ Capture the URL — go back to Step 5c and set **Site URL** to this exact value,
 
 ---
 
-## Step 7 — Verification
+## Step 7 — Verification [DONE]
 
 **Automated:**
 ```bash
