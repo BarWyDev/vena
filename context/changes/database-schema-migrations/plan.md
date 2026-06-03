@@ -226,28 +226,28 @@ Data volume is small (single-donor MVP). The `(user_id, donated_at desc)` index 
 
 #### Automated
 
-- [x] 1.1 Local DB rebuilds cleanly from the migration (`supabase db reset`)
-- [x] 1.2 Migration file present (`ls supabase/migrations/*_init_profiles_donations.sql`)
-- [x] 1.3 Enums and tables exist after reset (no errors; `profiles` + `donations` listed)
+- [x] 1.1 Local DB rebuilds cleanly from the migration (`supabase db reset`) — 0ef3494
+- [x] 1.2 Migration file present (`ls supabase/migrations/*_init_profiles_donations.sql`) — 0ef3494
+- [x] 1.3 Enums and tables exist after reset (no errors; `profiles` + `donations` listed) — 0ef3494
 
 #### Manual
 
-- [x] 1.4 Two-user isolation: user B cannot SELECT user A's rows
-- [x] 1.5 Cross-owner write rejected by `WITH CHECK`
-- [x] 1.6 RLS confirmed enabled on both tables (`relrowsecurity` true)
+- [x] 1.4 Two-user isolation: user B cannot SELECT user A's rows — 0ef3494
+- [x] 1.5 Cross-owner write rejected by `WITH CHECK` — 0ef3494
+- [x] 1.6 RLS confirmed enabled on both tables (`relrowsecurity` true) — 0ef3494
 
 ### Phase 2: Typed DB bindings
 
 #### Automated
 
-- [ ] 2.1 Types file generated and non-empty (`test -s src/db/database.types.ts`)
-- [ ] 2.2 Build / type-check passes with typed client (`npm run build`)
-- [ ] 2.3 Lint passes (`npm run lint`)
+- [x] 2.1 Types file generated and non-empty (`test -s src/db/database.types.ts`)
+- [x] 2.2 Build / type-check passes with typed client (`npm run build`)
+- [x] 2.3 Lint passes (`npm run lint`)
 
 #### Manual
 
-- [ ] 2.4 Types file lists `profiles`, `donations`, and the four enum unions
-- [ ] 2.5 `supabase.from("profiles").select("sex")` type-checks against the `sex` enum
+- [x] 2.4 Types file lists `profiles`, `donations`, and the four enum unions
+- [x] 2.5 `supabase.from("profiles").select("sex")` type-checks against the `sex` enum
 
 ### Phase 3: Remote application
 
