@@ -253,9 +253,9 @@ Data volume is small (single-donor MVP). The `(user_id, donated_at desc)` index 
 
 #### Automated
 
-- [x] 3.1 Remote migration history shows the migration applied (`supabase migration list`)
+- [x] 3.1 Remote migration history shows the migration applied (`supabase migration list`) — d579e4a
 
 #### Manual
 
-- [x] 3.2 Two-user isolation check passes against the remote project
-- [x] 3.3 `profiles` + `donations` visible in remote Studio with RLS enabled
+- [x] 3.2 Two-user isolation check passes against the remote project — d579e4a
+- [x] 3.3 `profiles` + `donations` visible in remote Studio with RLS enabled — d579e4a
