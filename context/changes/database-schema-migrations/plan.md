@@ -240,22 +240,22 @@ Data volume is small (single-donor MVP). The `(user_id, donated_at desc)` index 
 
 #### Automated
 
-- [x] 2.1 Types file generated and non-empty (`test -s src/db/database.types.ts`)
-- [x] 2.2 Build / type-check passes with typed client (`npm run build`)
-- [x] 2.3 Lint passes (`npm run lint`)
+- [x] 2.1 Types file generated and non-empty (`test -s src/db/database.types.ts`) — a37fddd
+- [x] 2.2 Build / type-check passes with typed client (`npm run build`) — a37fddd
+- [x] 2.3 Lint passes (`npm run lint`) — a37fddd
 
 #### Manual
 
-- [x] 2.4 Types file lists `profiles`, `donations`, and the four enum unions
-- [x] 2.5 `supabase.from("profiles").select("sex")` type-checks against the `sex` enum
+- [x] 2.4 Types file lists `profiles`, `donations`, and the four enum unions — a37fddd
+- [x] 2.5 `supabase.from("profiles").select("sex")` type-checks against the `sex` enum — a37fddd
 
 ### Phase 3: Remote application
 
 #### Automated
 
-- [ ] 3.1 Remote migration history shows the migration applied (`supabase migration list`)
+- [x] 3.1 Remote migration history shows the migration applied (`supabase migration list`)
 
 #### Manual
 
-- [ ] 3.2 Two-user isolation check passes against the remote project
-- [ ] 3.3 `profiles` + `donations` visible in remote Studio with RLS enabled
+- [x] 3.2 Two-user isolation check passes against the remote project
+- [x] 3.3 `profiles` + `donations` visible in remote Studio with RLS enabled
