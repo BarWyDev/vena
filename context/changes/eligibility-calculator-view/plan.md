@@ -310,13 +310,13 @@ No schema changes — F-01's migration provides the `donations` table with all r
 
 #### Automated
 
-- [ ] 1.1 Unit tests pass: `npm test` (8/8 green)
-- [ ] 1.2 Linting passes: `npm run lint`
-- [ ] 1.3 Type-checked build passes: `npm run build`
+- [x] 1.1 Unit tests pass: `npm test` (8/8 green)
+- [x] 1.2 Linting passes: `npm run lint`
+- [x] 1.3 Type-checked build passes: `npm run build`
 
 #### Manual
 
-- [ ] 1.4 `npm test` output lists 8 passing test names (no skipped or pending)
+- [x] 1.4 `npm test` output lists 8 passing test names (no skipped or pending)
 
 ### Phase 2: Donation data layer + add-donation API
 
