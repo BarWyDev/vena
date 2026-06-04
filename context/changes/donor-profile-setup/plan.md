@@ -235,38 +235,38 @@ No schema changes — F-01's migration already provides every column. No data mi
 
 #### Automated
 
-- [ ] 1.1 Linting passes: `npm run lint`
-- [ ] 1.2 Type-checked build passes: `npm run build`
+- [x] 1.1 Linting passes: `npm run lint`
+- [x] 1.2 Type-checked build passes: `npm run build`
 
 #### Manual
 
-- [ ] 1.3 POST with valid sex writes/updates the row
-- [ ] 1.4 POST with no sex redirects to `/profile?error=…` and writes nothing
+- [x] 1.3 POST with valid sex writes/updates the row
+- [x] 1.4 POST with no sex redirects to `/profile?error=…` and writes nothing
 
 ### Phase 2: Profile page + form UI
 
 #### Automated
 
-- [ ] 2.1 Linting passes: `npm run lint`
-- [ ] 2.2 Type-checked build passes: `npm run build`
+- [x] 2.1 Linting passes: `npm run lint`
+- [x] 2.2 Type-checked build passes: `npm run build`
 
 #### Manual
 
-- [ ] 2.3 Set sex + save → `/profile?saved=1` with "Zapisano" banner
-- [ ] 2.4 Reload `/profile` shows saved values prefilled
-- [ ] 2.5 Submit with no sex blocked client-side; dashboard link reaches `/profile`
-- [ ] 2.6 Unauthenticated `/profile` redirects to `/auth/signin`
+- [x] 2.3 Set sex + save → `/profile?saved=1` with "Zapisano" banner
+- [x] 2.4 Reload `/profile` shows saved values prefilled
+- [x] 2.5 Submit with no sex blocked client-side; dashboard link reaches `/profile`
+- [x] 2.6 Unauthenticated `/profile` redirects to `/auth/signin`
 
 ### Phase 3: Completeness gating
 
 #### Automated
 
-- [ ] 3.1 Linting passes: `npm run lint`
-- [ ] 3.2 Type-checked build passes: `npm run build`
+- [x] 3.1 Linting passes: `npm run lint`
+- [x] 3.2 Type-checked build passes: `npm run build`
 
 #### Manual
 
-- [ ] 3.3 Donor with no sex redirected to `/profile` from `/dashboard`
-- [ ] 3.4 After setting sex, `/dashboard` reachable without redirect
-- [ ] 3.5 No redirect loop on `/profile` with incomplete profile
-- [ ] 3.6 Second account cannot read the first's profile row (RLS isolation)
+- [x] 3.3 Donor with no sex redirected to `/profile` from `/dashboard`
+- [x] 3.4 After setting sex, `/dashboard` reachable without redirect
+- [x] 3.5 No redirect loop on `/profile` with incomplete profile
+- [x] 3.6 Second account cannot read the first's profile row (RLS isolation)
