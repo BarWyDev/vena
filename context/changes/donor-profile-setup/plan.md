@@ -247,15 +247,15 @@ No schema changes — F-01's migration already provides every column. No data mi
 
 #### Automated
 
-- [x] 2.1 Linting passes: `npm run lint`
-- [x] 2.2 Type-checked build passes: `npm run build`
+- [x] 2.1 Linting passes: `npm run lint` — e023107
+- [x] 2.2 Type-checked build passes: `npm run build` — e023107
 
 #### Manual
 
-- [x] 2.3 Set sex + save → `/profile?saved=1` with "Zapisano" banner
-- [x] 2.4 Reload `/profile` shows saved values prefilled
-- [x] 2.5 Submit with no sex blocked client-side; dashboard link reaches `/profile`
-- [x] 2.6 Unauthenticated `/profile` redirects to `/auth/signin`
+- [x] 2.3 Set sex + save → `/profile?saved=1` with "Zapisano" banner — e023107
+- [x] 2.4 Reload `/profile` shows saved values prefilled — e023107
+- [x] 2.5 Submit with no sex blocked client-side; dashboard link reaches `/profile` — e023107
+- [x] 2.6 Unauthenticated `/profile` redirects to `/auth/signin` — e023107
 
 ### Phase 3: Completeness gating
 
