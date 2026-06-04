@@ -310,28 +310,28 @@ No schema changes — F-01's migration provides the `donations` table with all r
 
 #### Automated
 
-- [x] 1.1 Unit tests pass: `npm test` (8/8 green)
-- [x] 1.2 Linting passes: `npm run lint`
-- [x] 1.3 Type-checked build passes: `npm run build`
+- [x] 1.1 Unit tests pass: `npm test` (8/8 green) — 6f9baa0
+- [x] 1.2 Linting passes: `npm run lint` — 6f9baa0
+- [x] 1.3 Type-checked build passes: `npm run build` — 6f9baa0
 
 #### Manual
 
-- [x] 1.4 `npm test` output lists 8 passing test names (no skipped or pending)
+- [x] 1.4 `npm test` output lists 8 passing test names (no skipped or pending) — 6f9baa0
 
 ### Phase 2: Donation data layer + add-donation API
 
 #### Automated
 
-- [ ] 2.1 Linting passes: `npm run lint`
-- [ ] 2.2 Type-checked build passes: `npm run build`
+- [x] 2.1 Linting passes: `npm run lint`
+- [x] 2.2 Type-checked build passes: `npm run build`
 
 #### Manual
 
-- [ ] 2.3 POST with valid data inserts row (verified in Supabase Studio)
-- [ ] 2.4 POST with invalid type redirects to `/donations?error=…`
-- [ ] 2.5 POST with future donated_at redirects to `/donations?error=…`
-- [ ] 2.6 Unauthenticated POST redirects to `/auth/signin`
-- [ ] 2.7 Unauthenticated GET `/donations` redirects to `/auth/signin`
+- [x] 2.3 POST with valid data inserts row (verified in Supabase Studio)
+- [x] 2.4 POST with invalid type redirects to `/donations?error=…`
+- [x] 2.5 POST with future donated_at redirects to `/donations?error=…`
+- [x] 2.6 Unauthenticated POST redirects to `/auth/signin`
+- [x] 2.7 Unauthenticated GET `/donations` redirects to `/auth/signin`
 
 ### Phase 3: /donations page + UI components + dashboard link
 
