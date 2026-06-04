@@ -1,0 +1,33 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProfileForm from "@/components/profile/ProfileForm";
+import { createClient } from "@/lib/supabase";
+import { getProfile } from "@/lib/profile";
+
+const { user } = Astro.locals;
+const error = Astro.url.searchParams.get("error");
+const saved = Astro.url.searchParams.get("saved") === "1";
+
+let initial = { sex: null as string | null, blood_group: null as string | null, rh: null as string | null };
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+if (supabase && user) {
+  const profile = await getProfile(supabase, user.id);
+  if (profile) {
+    initial = { sex: profile.sex, blood_group: profile.blood_group, rh: profile.rh };
+  }
+}
+---
+
+<Layout title="Twój profil">
+  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+      <h1
+        class="mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
+      >
+        Twój profil
+      </h1>
+      <ProfileForm initial={initial} serverError={error} saved={saved} client:load />
+    </div>
+  </div>
+</Layout>

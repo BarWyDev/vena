@@ -235,13 +235,13 @@ No schema changes — F-01's migration already provides every column. No data mi
 
 #### Automated
 
-- [x] 1.1 Linting passes: `npm run lint`
-- [x] 1.2 Type-checked build passes: `npm run build`
+- [x] 1.1 Linting passes: `npm run lint` — 6bbcdd7
+- [x] 1.2 Type-checked build passes: `npm run build` — 6bbcdd7
 
 #### Manual
 
-- [x] 1.3 POST with valid sex writes/updates the row
-- [x] 1.4 POST with no sex redirects to `/profile?error=…` and writes nothing
+- [x] 1.3 POST with valid sex writes/updates the row — 6bbcdd7
+- [x] 1.4 POST with no sex redirects to `/profile?error=…` and writes nothing — 6bbcdd7
 
 ### Phase 2: Profile page + form UI
 
