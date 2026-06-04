@@ -337,15 +337,15 @@ No schema changes — F-01's migration provides the `donations` table with all r
 
 #### Automated
 
-- [x] 3.1 Linting passes: `npm run lint`
-- [x] 3.2 Type-checked build passes: `npm run build`
+- [x] 3.1 Linting passes: `npm run lint` — a255410
+- [x] 3.2 Type-checked build passes: `npm run build` — a255410
 
 #### Manual
 
-- [x] 3.3 Empty-state text + form visible for donor with no donations
-- [x] 3.4 Adding a donation redirects to `?added=1&type=<type>` with correct eligibility date
-- [x] 3.5 All three cards populated after adding one donation of each type
-- [x] 3.6 Card click highlights card + updates URL `?type=` without page reload
-- [x] 3.7 Unauthenticated GET `/donations` redirects to `/auth/signin`
-- [x] 3.8 Donor with `sex` unset redirected to `/profile` when visiting `/donations`
-- [x] 3.9 Dashboard link navigates to `/donations`
+- [x] 3.3 Empty-state text + form visible for donor with no donations — a255410
+- [x] 3.4 Adding a donation redirects to `?added=1&type=<type>` with correct eligibility date — a255410
+- [x] 3.5 All three cards populated after adding one donation of each type — a255410
+- [x] 3.6 Card click highlights card + updates URL `?type=` without page reload — a255410
+- [x] 3.7 Unauthenticated GET `/donations` redirects to `/auth/signin` — a255410
+- [x] 3.8 Donor with `sex` unset redirected to `/profile` when visiting `/donations` — a255410
+- [x] 3.9 Dashboard link navigates to `/donations` — a255410
