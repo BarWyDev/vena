@@ -1,7 +1,7 @@
 ---
 change_id: donor-profile-setup
 title: Donor profile setup — sex, blood group, Rh
-status: implementing
+status: implemented
 created: 2026-06-03
 updated: 2026-06-04
 archived_at: null

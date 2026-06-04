@@ -261,12 +261,12 @@ No schema changes — F-01's migration already provides every column. No data mi
 
 #### Automated
 
-- [x] 3.1 Linting passes: `npm run lint`
-- [x] 3.2 Type-checked build passes: `npm run build`
+- [x] 3.1 Linting passes: `npm run lint` — c7c01b1
+- [x] 3.2 Type-checked build passes: `npm run build` — c7c01b1
 
 #### Manual
 
-- [x] 3.3 Donor with no sex redirected to `/profile` from `/dashboard`
-- [x] 3.4 After setting sex, `/dashboard` reachable without redirect
-- [x] 3.5 No redirect loop on `/profile` with incomplete profile
-- [x] 3.6 Second account cannot read the first's profile row (RLS isolation)
+- [x] 3.3 Donor with no sex redirected to `/profile` from `/dashboard` — c7c01b1
+- [x] 3.4 After setting sex, `/dashboard` reachable without redirect — c7c01b1
+- [x] 3.5 No redirect loop on `/profile` with incomplete profile — c7c01b1
+- [x] 3.6 Second account cannot read the first's profile row (RLS isolation) — c7c01b1
