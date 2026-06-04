@@ -1,0 +1,64 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import DonationForm from "@/components/donations/DonationForm";
+import EligibilityCards from "@/components/donations/EligibilityCards";
+import { createClient } from "@/lib/supabase";
+import { getProfile } from "@/lib/profile";
+import { getDonations, getLatestPerType } from "@/lib/donations";
+import type { DonationRow } from "@/lib/donations";
+import { calculateEligibility, DONATION_TYPES } from "@/lib/eligibility";
+import type { EligibilityResult, DonationType } from "@/lib/eligibility";
+
+const { user } = Astro.locals;
+const error = Astro.url.searchParams.get("error");
+const added = Astro.url.searchParams.get("added") === "1";
+const typeRaw = Astro.url.searchParams.get("type");
+const typeParam: DonationType | null = DONATION_TYPES.includes(typeRaw as DonationType)
+  ? (typeRaw as DonationType)
+  : null;
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+let donations: DonationRow[] = [];
+let eligibility: EligibilityResult | null = null;
+
+if (supabase && user) {
+  const [profile, donationsData] = await Promise.all([getProfile(supabase, user.id), getDonations(supabase, user.id)]);
+  donations = donationsData;
+  if (profile?.sex) {
+    eligibility = calculateEligibility(getLatestPerType(donations), profile.sex);
+  }
+}
+
+const hasDonations = donations.length > 0;
+---
+
+<Layout title="Moje donacje">
+  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
+    <div class="w-full max-w-2xl rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+      <h1
+        class="mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
+      >
+        Moje donacje
+      </h1>
+
+      {
+        !hasDonations && (
+          <p class="mb-6 text-center text-sm text-blue-100/70">
+            Dodaj pierwszą donację, aby zobaczyć kiedy możesz oddać krew następnym razem.
+          </p>
+        )
+      }
+
+      {
+        hasDonations && eligibility && (
+          <div class="mb-6">
+            <EligibilityCards eligibility={eligibility} initialSelectedType={typeParam} client:load />
+          </div>
+        )
+      }
+
+      <DonationForm serverError={error} added={added} client:load />
+    </div>
+  </div>
+</Layout>

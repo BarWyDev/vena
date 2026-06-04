@@ -322,30 +322,30 @@ No schema changes — F-01's migration provides the `donations` table with all r
 
 #### Automated
 
-- [x] 2.1 Linting passes: `npm run lint`
-- [x] 2.2 Type-checked build passes: `npm run build`
+- [x] 2.1 Linting passes: `npm run lint` — 3c695fd
+- [x] 2.2 Type-checked build passes: `npm run build` — 3c695fd
 
 #### Manual
 
-- [x] 2.3 POST with valid data inserts row (verified in Supabase Studio)
-- [x] 2.4 POST with invalid type redirects to `/donations?error=…`
-- [x] 2.5 POST with future donated_at redirects to `/donations?error=…`
-- [x] 2.6 Unauthenticated POST redirects to `/auth/signin`
-- [x] 2.7 Unauthenticated GET `/donations` redirects to `/auth/signin`
+- [x] 2.3 POST with valid data inserts row (verified in Supabase Studio) — 3c695fd
+- [x] 2.4 POST with invalid type redirects to `/donations?error=…` — 3c695fd
+- [x] 2.5 POST with future donated_at redirects to `/donations?error=…` — 3c695fd
+- [x] 2.6 Unauthenticated POST redirects to `/auth/signin` — 3c695fd
+- [x] 2.7 Unauthenticated GET `/donations` redirects to `/auth/signin` — 3c695fd
 
 ### Phase 3: /donations page + UI components + dashboard link
 
 #### Automated
 
-- [ ] 3.1 Linting passes: `npm run lint`
-- [ ] 3.2 Type-checked build passes: `npm run build`
+- [x] 3.1 Linting passes: `npm run lint`
+- [x] 3.2 Type-checked build passes: `npm run build`
 
 #### Manual
 
-- [ ] 3.3 Empty-state text + form visible for donor with no donations
-- [ ] 3.4 Adding a donation redirects to `?added=1&type=<type>` with correct eligibility date
-- [ ] 3.5 All three cards populated after adding one donation of each type
-- [ ] 3.6 Card click highlights card + updates URL `?type=` without page reload
-- [ ] 3.7 Unauthenticated GET `/donations` redirects to `/auth/signin`
-- [ ] 3.8 Donor with `sex` unset redirected to `/profile` when visiting `/donations`
-- [ ] 3.9 Dashboard link navigates to `/donations`
+- [x] 3.3 Empty-state text + form visible for donor with no donations
+- [x] 3.4 Adding a donation redirects to `?added=1&type=<type>` with correct eligibility date
+- [x] 3.5 All three cards populated after adding one donation of each type
+- [x] 3.6 Card click highlights card + updates URL `?type=` without page reload
+- [x] 3.7 Unauthenticated GET `/donations` redirects to `/auth/signin`
+- [x] 3.8 Donor with `sex` unset redirected to `/profile` when visiting `/donations`
+- [x] 3.9 Dashboard link navigates to `/donations`
