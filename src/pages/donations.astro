@@ -4,14 +4,17 @@ import DonationForm from "@/components/donations/DonationForm";
 import EligibilityCards from "@/components/donations/EligibilityCards";
 import { createClient } from "@/lib/supabase";
 import { getProfile } from "@/lib/profile";
-import { getDonations, getLatestPerType } from "@/lib/donations";
+import { getDonations, getLatestPerType, getLatestIds } from "@/lib/donations";
 import type { DonationRow } from "@/lib/donations";
+import DonationHistory from "@/components/donations/DonationHistory";
 import { calculateEligibility, DONATION_TYPES } from "@/lib/eligibility";
 import type { EligibilityResult, DonationType } from "@/lib/eligibility";
 
 const { user } = Astro.locals;
 const error = Astro.url.searchParams.get("error");
 const added = Astro.url.searchParams.get("added") === "1";
+const edited = Astro.url.searchParams.get("edited") === "1";
+const deleted = Astro.url.searchParams.get("deleted") === "1";
 const typeRaw = Astro.url.searchParams.get("type");
 const typeParam: DonationType | null = DONATION_TYPES.includes(typeRaw as DonationType)
   ? (typeRaw as DonationType)
@@ -31,11 +34,27 @@ if (supabase && user) {
 }
 
 const hasDonations = donations.length > 0;
+const latestIds = getLatestIds(donations);
 ---
 
 <Layout title="Moje donacje">
   <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
     <div class="w-full max-w-2xl rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+      {
+        edited && (
+          <p class="mb-4 rounded-lg border border-green-500/30 bg-green-900/30 px-3 py-2 text-sm text-green-300">
+            Donacja zaktualizowana
+          </p>
+        )
+      }
+      {
+        deleted && (
+          <p class="mb-4 rounded-lg border border-green-500/30 bg-green-900/30 px-3 py-2 text-sm text-green-300">
+            Donacja usunięta
+          </p>
+        )
+      }
+
       <h1
         class="mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
       >
@@ -59,6 +78,15 @@ const hasDonations = donations.length > 0;
       }
 
       <DonationForm serverError={error} added={added} client:load />
+
+      {
+        hasDonations && (
+          <>
+            <h2 class="mt-8 mb-4 text-sm font-semibold text-blue-100/70">Historia donacji</h2>
+            <DonationHistory donations={donations} latestIds={latestIds} client:load />
+          </>
+        )
+      }
     </div>
   </div>
 </Layout>
