@@ -276,8 +276,8 @@ No schema changes. All required columns (`id`, `user_id`, `type`, `donated_at`) 
 
 #### Automated
 
-- [x] 1.1 Linting passes: `npm run lint`
-- [x] 1.2 Type-checked build passes: `npm run build`
+- [x] 1.1 Linting passes: `npm run lint` — accdae9
+- [x] 1.2 Type-checked build passes: `npm run build` — accdae9
 
 #### Manual
 
@@ -292,8 +292,8 @@ No schema changes. All required columns (`id`, `user_id`, `type`, `donated_at`) 
 
 #### Automated
 
-- [ ] 2.1 Linting passes: `npm run lint`
-- [ ] 2.2 Type-checked build passes: `npm run build`
+- [x] 2.1 Linting passes: `npm run lint`
+- [x] 2.2 Type-checked build passes: `npm run build`
 
 #### Manual
 
