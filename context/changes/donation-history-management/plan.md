@@ -281,12 +281,12 @@ No schema changes. All required columns (`id`, `user_id`, `type`, `donated_at`) 
 
 #### Manual
 
-- [ ] 1.3 POST to `/api/donations/{valid-id}` with valid type + date → row updated in Supabase Studio
-- [ ] 1.4 POST with invalid type → redirect to `/donations?error=…`
-- [ ] 1.5 POST with future `donated_at` → redirect to `/donations?error=…`
-- [ ] 1.6 POST to `/api/donations/{other-users-id}` → no row updated
-- [ ] 1.7 POST to `/api/donations/{valid-id}/delete` → row gone in Supabase Studio
-- [ ] 1.8 Unauthenticated delete POST → redirect to `/auth/signin`
+- [x] 1.3 POST to `/api/donations/{valid-id}` with valid type + date → row updated in Supabase Studio
+- [x] 1.4 POST with invalid type → redirect to `/donations?error=…`
+- [x] 1.5 POST with future `donated_at` → redirect to `/donations?error=…`
+- [x] 1.6 POST to `/api/donations/{other-users-id}` → no row updated
+- [x] 1.7 POST to `/api/donations/{valid-id}/delete` → row gone in Supabase Studio
+- [x] 1.8 Unauthenticated delete POST → redirect to `/auth/signin`
 
 ### Phase 2: Edit page + form component
 
@@ -297,26 +297,26 @@ No schema changes. All required columns (`id`, `user_id`, `type`, `donated_at`) 
 
 #### Manual
 
-- [ ] 2.3 `/donations/{valid-id}/edit` shows pre-filled form
-- [ ] 2.4 Submitting valid edit → `/donations?edited=1` with updated eligibility card
-- [ ] 2.5 `/donations/{nonexistent-id}/edit` → redirect to `/donations`
-- [ ] 2.6 `/donations/{other-users-id}/edit` → redirect to `/donations`
-- [ ] 2.7 Unauthenticated GET → redirect to `/auth/signin`
+- [x] 2.3 `/donations/{valid-id}/edit` shows pre-filled form
+- [x] 2.4 Submitting valid edit → `/donations?edited=1` with updated eligibility card
+- [x] 2.5 `/donations/{nonexistent-id}/edit` → redirect to `/donations`
+- [x] 2.6 `/donations/{other-users-id}/edit` → redirect to `/donations`
+- [x] 2.7 Unauthenticated GET → redirect to `/auth/signin`
 
 ### Phase 3: History list component + donations page update
 
 #### Automated
 
-- [x] 3.1 Linting passes: `npm run lint`
-- [x] 3.2 Type-checked build passes: `npm run build`
+- [x] 3.1 Linting passes: `npm run lint` — e51c453
+- [x] 3.2 Type-checked build passes: `npm run build` — e51c453
 
 #### Manual
 
-- [ ] 3.3 History list visible below add form when donations exist
-- [ ] 3.4 "Edytuj" navigates to edit page; edit success shows "Donacja zaktualizowana" banner
-- [ ] 3.5 "Usuń" → inline confirm; "Anuluj" collapses without action
-- [ ] 3.6 No amber warning when deleting non-latest donation
-- [ ] 3.7 Amber warning shown when deleting most-recent donation of its type
-- [ ] 3.8 Confirmed delete → `/donations?deleted=1`, row removed, eligibility recalculated
-- [ ] 3.9 Deleting last donation of a type → card shows "Brak danych"
-- [ ] 3.10 History list absent with zero donations
+- [x] 3.3 History list visible below add form when donations exist
+- [x] 3.4 "Edytuj" navigates to edit page; edit success shows "Donacja zaktualizowana" banner
+- [x] 3.5 "Usuń" → inline confirm; "Anuluj" collapses without action
+- [x] 3.6 No amber warning when deleting non-latest donation
+- [x] 3.7 Amber warning shown when deleting most-recent donation of its type
+- [x] 3.8 Confirmed delete → `/donations?deleted=1`, row removed, eligibility recalculated
+- [x] 3.9 Deleting last donation of a type → card shows "Brak danych"
+- [x] 3.10 History list absent with zero donations

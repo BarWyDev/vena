@@ -1,7 +1,7 @@
 ---
 change_id: donation-history-management
 title: Donation history list with edit and delete
-status: implementing
+status: implemented
 created: 2026-06-04
 updated: 2026-06-05
 archived_at: null
