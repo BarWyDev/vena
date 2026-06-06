@@ -325,31 +325,31 @@ No automated test suite is configured (AGENTS.md). Verification is `npm run lint
 
 #### Automated
 
-- [x] 1.1 Linting passes: `npm run lint`
-- [x] 1.2 Build passes: `npm run build`
-- [x] 1.3 No remaining `/dashboard` destination references (`grep -rn "/dashboard" src/`)
+- [x] 1.1 Linting passes: `npm run lint` — d2e8787
+- [x] 1.2 Build passes: `npm run build` — d2e8787
+- [x] 1.3 No remaining `/dashboard` destination references (`grep -rn "/dashboard" src/`) — d2e8787
 
 #### Manual
 
-- [x] 1.4 Login with complete profile lands on `/donations`
-- [x] 1.5 Login with incomplete profile lands on `/profile`
-- [x] 1.6 `/dashboard` redirects to `/donations`
-- [x] 1.7 Topbar shows Donacje · Profil · Wyloguj and links work
+- [x] 1.4 Login with complete profile lands on `/donations` — d2e8787
+- [x] 1.5 Login with incomplete profile lands on `/profile` — d2e8787
+- [x] 1.6 `/dashboard` redirects to `/donations` — d2e8787
+- [x] 1.7 Topbar shows Donacje · Profil · Wyloguj and links work — d2e8787
 
 ### Phase 2: AuthShell + Page Migration
 
 #### Automated
 
-- [ ] 2.1 Linting passes: `npm run lint`
-- [ ] 2.2 Build passes: `npm run build`
-- [ ] 2.3 No `bg-cosmic` in `src/pages` (`grep -rn "bg-cosmic" src/pages`)
+- [x] 2.1 Linting passes: `npm run lint`
+- [x] 2.2 Build passes: `npm run build`
+- [x] 2.3 No `bg-cosmic` in `src/pages` (`grep -rn "bg-cosmic" src/pages`)
 
 #### Manual
 
-- [ ] 2.4 `/profile`, `/donations`, edit page render red theme with top Topbar + content card
-- [ ] 2.5 `/auth/confirm-email` renders red theme with Polish copy (both variants)
-- [ ] 2.6 Landing page visually unchanged after extraction
-- [ ] 2.7 Topbar navigation works from each authenticated page
+- [x] 2.4 `/profile`, `/donations`, edit page render red theme with top Topbar + content card
+- [x] 2.5 `/auth/confirm-email` renders red theme with Polish copy (both variants)
+- [x] 2.6 Landing page visually unchanged after extraction
+- [x] 2.7 Topbar navigation works from each authenticated page
 
 ### Phase 3: React Component Restyle
 

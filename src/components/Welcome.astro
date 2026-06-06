@@ -1,211 +1,168 @@
 ---
-import Topbar from "@/components/Topbar.astro";
+import AuthShell from "@/components/AuthShell.astro";
 ---
 
-<div
-  class="relative min-h-screen w-full overflow-hidden"
-  style="background-image: linear-gradient(to bottom, #0d0a0a, #160a0a, #0d0a0a);"
->
-  <!-- Blood-themed ambient glow -->
-  <div
-    class="pointer-events-none absolute top-1/4 -left-24 h-[400px] w-[400px] rounded-full blur-[140px]"
-    style="background: rgba(220, 38, 38, 0.12);"
-  >
-  </div>
-  <div
-    class="pointer-events-none absolute top-2/3 -right-16 h-[280px] w-[280px] rounded-full blur-[110px]"
-    style="background: rgba(185, 28, 28, 0.10);"
-  >
-  </div>
-  <div
-    class="pointer-events-none absolute top-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full blur-[150px]"
-    style="background: rgba(239, 68, 68, 0.08);"
-  >
-  </div>
+<AuthShell>
+  <!-- Hero -->
+  <div class="mx-auto flex max-w-3xl flex-col items-center justify-center px-4 py-20 text-center sm:py-28 lg:py-36">
+    <!-- Badge -->
+    <div
+      class="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium"
+      style="border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.08); color: #fca5a5;"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="shrink-0"
+      >
+        <path
+          d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"
+        ></path>
+      </svg>
+      Dziennik krwiodawcy
+    </div>
 
-  <!-- Subtle dot pattern -->
-  <div
-    class="pointer-events-none absolute inset-0"
-    style="background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 180px 180px, 120px 120px; background-position: 0 0, 45px 55px;"
-  >
-  </div>
+    <h1
+      class="mb-5 text-5xl leading-tight font-bold sm:text-6xl lg:text-7xl"
+      style="background: linear-gradient(135deg, #fecaca 0%, #f87171 40%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+    >
+      Twoja krew,<br />twoja historia
+    </h1>
 
-  <div class="relative z-10 p-4 sm:p-8">
-    <Topbar />
+    <p class="mb-10 max-w-xl text-base leading-relaxed sm:text-lg" style="color: rgba(254,202,202,0.65);">
+      Śledź każde oddanie krwi, sprawdzaj kiedy możesz oddać następne i obserwuj swój wkład w ratowanie życia.
+    </p>
 
-    <!-- Hero -->
-    <div class="mx-auto flex max-w-3xl flex-col items-center justify-center px-4 py-20 text-center sm:py-28 lg:py-36">
-      <!-- Badge -->
-      <div
-        class="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium"
-        style="border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.08); color: #fca5a5;"
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <a
+        href="/auth/signup"
+        class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.98]"
+        style="background: linear-gradient(135deg, #dc2626, #b91c1c);"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="12"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          class="shrink-0"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line
+            x1="19"
+            x2="19"
+            y1="8"
+            y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line>
+        </svg>
+        Zacznij bezpłatnie
+      </a>
+      <a
+        href="/auth/signin"
+        class="inline-flex items-center justify-center rounded-xl px-7 py-3 text-sm font-medium transition-all hover:brightness-125 active:scale-[0.98]"
+        style="border: 1px solid rgba(220,38,38,0.3); background: rgba(220,38,38,0.06); color: #fca5a5;"
+      >
+        Mam już konto
+      </a>
+    </div>
+  </div>
+
+  <!-- Feature cards -->
+  <div class="mx-auto grid max-w-4xl grid-cols-1 gap-5 px-4 pb-20 sm:grid-cols-3">
+    <!-- Historia oddań -->
+    <div
+      class="rounded-2xl p-6"
+      style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);"
+    >
+      <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl" style="background: rgba(220,38,38,0.15);">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: #f87171;"
+        >
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"
+          ></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline
+            points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+      <h3 class="mb-2 text-base font-semibold text-white">Historia oddań</h3>
+      <p class="text-sm leading-relaxed" style="color: rgba(254,202,202,0.55);">
+        Zapisuj każde oddanie krwi, osocza lub płytek. Miej wszystko w jednym miejscu.
+      </p>
+    </div>
+
+    <!-- Następne oddanie -->
+    <div
+      class="rounded-2xl p-6"
+      style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);"
+    >
+      <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl" style="background: rgba(220,38,38,0.15);">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: #f87171;"
+        >
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line
+            x1="8"
+            x2="8"
+            y1="2"
+            y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="m9 16 2 2 4-4"></path>
+        </svg>
+      </div>
+      <h3 class="mb-2 text-base font-semibold text-white">Kiedy następne oddanie?</h3>
+      <p class="text-sm leading-relaxed" style="color: rgba(254,202,202,0.55);">
+        Automatycznie obliczamy, kiedy znów możesz oddać krew i przypomnimy Ci o tym.
+      </p>
+    </div>
+
+    <!-- Twój wkład -->
+    <div
+      class="rounded-2xl p-6"
+      style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);"
+    >
+      <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl" style="background: rgba(220,38,38,0.15);">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: #f87171;"
         >
           <path
             d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"
           ></path>
         </svg>
-        Dziennik krwiodawcy
       </div>
-
-      <h1
-        class="mb-5 text-5xl leading-tight font-bold sm:text-6xl lg:text-7xl"
-        style="background: linear-gradient(135deg, #fecaca 0%, #f87171 40%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
-      >
-        Twoja krew,<br />twoja historia
-      </h1>
-
-      <p class="mb-10 max-w-xl text-base leading-relaxed sm:text-lg" style="color: rgba(254,202,202,0.65);">
-        Śledź każde oddanie krwi, sprawdzaj kiedy możesz oddać następne i obserwuj swój wkład w ratowanie życia.
+      <h3 class="mb-2 text-base font-semibold text-white">Twój wkład</h3>
+      <p class="text-sm leading-relaxed" style="color: rgba(254,202,202,0.55);">
+        Obserwuj ile litrów krwi oddałeś i ilu osobom mogłeś pomóc. Każda kropla się liczy.
       </p>
-
-      <div class="flex flex-col gap-3 sm:flex-row">
-        <a
-          href="/auth/signup"
-          class="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.98]"
-          style="background: linear-gradient(135deg, #dc2626, #b91c1c);"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line
-              x1="19"
-              x2="19"
-              y1="8"
-              y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line>
-          </svg>
-          Zacznij bezpłatnie
-        </a>
-        <a
-          href="/auth/signin"
-          class="inline-flex items-center justify-center rounded-xl px-7 py-3 text-sm font-medium transition-all hover:brightness-125 active:scale-[0.98]"
-          style="border: 1px solid rgba(220,38,38,0.3); background: rgba(220,38,38,0.06); color: #fca5a5;"
-        >
-          Mam już konto
-        </a>
-      </div>
-    </div>
-
-    <!-- Feature cards -->
-    <div class="mx-auto grid max-w-4xl grid-cols-1 gap-5 px-4 pb-20 sm:grid-cols-3">
-      <!-- Historia oddań -->
-      <div
-        class="rounded-2xl p-6"
-        style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);"
-      >
-        <div
-          class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
-          style="background: rgba(220,38,38,0.15);"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="color: #f87171;"
-          >
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline
-              points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line
-              x1="16"
-              x2="8"
-              y1="17"
-              y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <h3 class="mb-2 text-base font-semibold text-white">Historia oddań</h3>
-        <p class="text-sm leading-relaxed" style="color: rgba(254,202,202,0.55);">
-          Zapisuj każde oddanie krwi, osocza lub płytek. Miej wszystko w jednym miejscu.
-        </p>
-      </div>
-
-      <!-- Następne oddanie -->
-      <div
-        class="rounded-2xl p-6"
-        style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);"
-      >
-        <div
-          class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
-          style="background: rgba(220,38,38,0.15);"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="color: #f87171;"
-          >
-            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"
-            ></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path
-              d="m9 16 2 2 4-4"></path>
-          </svg>
-        </div>
-        <h3 class="mb-2 text-base font-semibold text-white">Kiedy następne oddanie?</h3>
-        <p class="text-sm leading-relaxed" style="color: rgba(254,202,202,0.55);">
-          Automatycznie obliczamy, kiedy znów możesz oddać krew i przypomnimy Ci o tym.
-        </p>
-      </div>
-
-      <!-- Twój wkład -->
-      <div
-        class="rounded-2xl p-6"
-        style="border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);"
-      >
-        <div
-          class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
-          style="background: rgba(220,38,38,0.15);"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="color: #f87171;"
-          >
-            <path
-              d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"
-            ></path>
-          </svg>
-        </div>
-        <h3 class="mb-2 text-base font-semibold text-white">Twój wkład</h3>
-        <p class="text-sm leading-relaxed" style="color: rgba(254,202,202,0.55);">
-          Obserwuj ile litrów krwi oddałeś i ilu osobom mogłeś pomóc. Każda kropla się liczy.
-        </p>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="pb-8 text-center text-xs" style="color: rgba(254,202,202,0.3);">
-      Vena &mdash; dla każdego krwiodawcy
     </div>
   </div>
-</div>
+
+  <!-- Footer -->
+  <div class="pb-8 text-center text-xs" style="color: rgba(254,202,202,0.3);">Vena &mdash; dla każdego krwiodawcy</div>
+</AuthShell>
