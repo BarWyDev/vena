@@ -340,30 +340,30 @@ No automated test suite is configured (AGENTS.md). Verification is `npm run lint
 
 #### Automated
 
-- [x] 2.1 Linting passes: `npm run lint`
-- [x] 2.2 Build passes: `npm run build`
-- [x] 2.3 No `bg-cosmic` in `src/pages` (`grep -rn "bg-cosmic" src/pages`)
+- [x] 2.1 Linting passes: `npm run lint` — 85e4918
+- [x] 2.2 Build passes: `npm run build` — 85e4918
+- [x] 2.3 No `bg-cosmic` in `src/pages` (`grep -rn "bg-cosmic" src/pages`) — 85e4918
 
 #### Manual
 
-- [x] 2.4 `/profile`, `/donations`, edit page render red theme with top Topbar + content card
-- [x] 2.5 `/auth/confirm-email` renders red theme with Polish copy (both variants)
-- [x] 2.6 Landing page visually unchanged after extraction
-- [x] 2.7 Topbar navigation works from each authenticated page
+- [x] 2.4 `/profile`, `/donations`, edit page render red theme with top Topbar + content card — 85e4918
+- [x] 2.5 `/auth/confirm-email` renders red theme with Polish copy (both variants) — 85e4918
+- [x] 2.6 Landing page visually unchanged after extraction — 85e4918
+- [x] 2.7 Topbar navigation works from each authenticated page — 85e4918
 
 ### Phase 3: React Component Restyle
 
 #### Automated
 
-- [ ] 3.1 Linting passes: `npm run lint`
-- [ ] 3.2 Build passes: `npm run build`
-- [ ] 3.3 No blue/purple tokens in donation/profile components (`grep -rn "blue-\|purple-" src/components/donations src/components/profile`)
+- [x] 3.1 Linting passes: `npm run lint`
+- [x] 3.2 Build passes: `npm run build`
+- [x] 3.3 No blue/purple tokens in donation/profile components (`grep -rn "blue-\|purple-" src/components/donations src/components/profile`)
 
 #### Manual
 
-- [ ] 3.4 All forms/lists/cards render red theme with no leftover blue/purple
-- [ ] 3.5 Eligibility card selected-state is red and still updates `?type=` URL
-- [ ] 3.6 Success banners green, error/validation red
+- [x] 3.4 All forms/lists/cards render red theme with no leftover blue/purple
+- [x] 3.5 Eligibility card selected-state is red and still updates `?type=` URL
+- [x] 3.6 Success banners green, error/validation red
 
 ### Phase 4: Docs & Cleanup
 
