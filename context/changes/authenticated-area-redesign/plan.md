@@ -369,10 +369,10 @@ No automated test suite is configured (AGENTS.md). Verification is `npm run lint
 
 #### Automated
 
-- [x] 4.1 `grep -rn "bg-cosmic" src/` returns nothing
-- [x] 4.2 Linting passes: `npm run lint`
-- [x] 4.3 Build passes: `npm run build`
+- [x] 4.1 `grep -rn "bg-cosmic" src/` returns nothing — 7200b7f
+- [x] 4.2 Linting passes: `npm run lint` — 7200b7f
+- [x] 4.3 Build passes: `npm run build` — 7200b7f
 
 #### Manual
 
-- [x] 4.4 End-to-end flow smoke test passes (register → confirm-email → signin → donations → add/edit → profile → signout)
+- [x] 4.4 End-to-end flow smoke test passes (register → confirm-email → signin → donations → add/edit → profile → signout) — 7200b7f
