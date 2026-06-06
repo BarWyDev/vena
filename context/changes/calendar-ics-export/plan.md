@@ -198,8 +198,8 @@ Add the "Eksportuj do kalendarza" button below the three eligibility cards insid
 
 #### Automated
 
-- [x] 2.1 Type-checking passes: `npx tsc --noEmit`
-- [x] 2.2 Linting passes: `npm run lint`
+- [x] 2.1 Type-checking passes: `npx tsc --noEmit` — 39a7871
+- [x] 2.2 Linting passes: `npm run lint` — 39a7871
 
 #### Manual
 
