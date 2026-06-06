@@ -348,27 +348,27 @@ No migration needed. Users who have never visited will download the SW on their 
 
 #### Automated
 
-- [x] 1.1 `npm run build` succeeds — `dist/client/manifest.webmanifest` exists
-- [x] 1.2 `npm run lint` passes
+- [x] 1.1 `npm run build` succeeds — `dist/client/manifest.webmanifest` exists — 92a742e
+- [x] 1.2 `npm run lint` passes — 92a742e
 
 #### Manual
 
-- [x] 1.3 DevTools → Application → Manifest: name "Vena", icons listed, display "standalone", lang "pl"
-- [x] 1.4 Lighthouse PWA → "Installable" check passes (or only SW items remain)
+- [x] 1.3 DevTools → Application → Manifest: name "Vena", icons listed, display "standalone", lang "pl" — 92a742e
+- [x] 1.4 Lighthouse PWA → "Installable" check passes (or only SW items remain) — 92a742e
 
 ### Phase 2: Service Worker + Offline Page
 
 #### Automated
 
-- [ ] 2.1 `npm run build` — `dist/client/sw.js` exists
-- [ ] 2.2 `npm run lint` passes — no TypeScript errors in `src/sw.ts`
+- [x] 2.1 `npm run build` — `dist/client/sw.js` exists
+- [x] 2.2 `npm run lint` passes — no TypeScript errors in `src/sw.ts`
 
 #### Manual
 
-- [ ] 2.3 DevTools → Application → Service Workers: "Activated and running"
-- [ ] 2.4 Offline + previously-visited `/donations` → cached page loads
-- [ ] 2.5 Offline + never-visited page → `offline.html` content shown
-- [ ] 2.6 DevTools → Cache Storage → "pages" cache shows visited URLs
+- [x] 2.3 DevTools → Application → Service Workers: "Activated and running"
+- [x] 2.4 Offline + previously-visited `/donations` → cached page loads
+- [x] 2.5 Offline + never-visited page → `offline.html` content shown
+- [x] 2.6 DevTools → Cache Storage → "pages" cache shows visited URLs
 
 ### Phase 3: Offline UX Components
 

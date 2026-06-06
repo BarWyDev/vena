@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brak połączenia — Vena</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: sans-serif;
+        background: #ffffff;
+        color: #111827;
+        text-align: center;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+      .container {
+        max-width: 400px;
+      }
+      h1 {
+        font-size: 1.5rem;
+        color: #dc2626;
+        margin-bottom: 0.75rem;
+      }
+      p {
+        font-size: 1rem;
+        color: #374151;
+        margin-bottom: 1.5rem;
+      }
+      button {
+        background: #dc2626;
+        color: #ffffff;
+        border: none;
+        border-radius: 0.375rem;
+        padding: 0.625rem 1.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #b91c1c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Brak połączenia</h1>
+      <p>
+        Ta strona nie jest dostępna offline — sprawdź połączenie i spróbuj
+        ponownie.
+      </p>
+      <button onclick="window.location.reload()">Spróbuj ponownie</button>
+    </div>
+  </body>
+</html>
