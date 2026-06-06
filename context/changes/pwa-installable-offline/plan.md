@@ -360,25 +360,25 @@ No migration needed. Users who have never visited will download the SW on their 
 
 #### Automated
 
-- [x] 2.1 `npm run build` — `dist/client/sw.js` exists
-- [x] 2.2 `npm run lint` passes — no TypeScript errors in `src/sw.ts`
+- [x] 2.1 `npm run build` — `dist/client/sw.js` exists — d7f0432
+- [x] 2.2 `npm run lint` passes — no TypeScript errors in `src/sw.ts` — d7f0432
 
 #### Manual
 
-- [x] 2.3 DevTools → Application → Service Workers: "Activated and running"
-- [x] 2.4 Offline + previously-visited `/donations` → cached page loads
-- [x] 2.5 Offline + never-visited page → `offline.html` content shown
-- [x] 2.6 DevTools → Cache Storage → "pages" cache shows visited URLs
+- [x] 2.3 DevTools → Application → Service Workers: "Activated and running" — d7f0432
+- [x] 2.4 Offline + previously-visited `/donations` → cached page loads — d7f0432
+- [x] 2.5 Offline + never-visited page → `offline.html` content shown — d7f0432
+- [x] 2.6 DevTools → Cache Storage → "pages" cache shows visited URLs — d7f0432
 
 ### Phase 3: Offline UX Components
 
 #### Automated
 
-- [ ] 3.1 `npm run build` succeeds
-- [ ] 3.2 `npm run lint` passes — React Compiler rules satisfied
+- [x] 3.1 `npm run build` succeeds
+- [x] 3.2 `npm run lint` passes — React Compiler rules satisfied
 
 #### Manual
 
-- [ ] 3.3 DevTools Offline toggle → "Przeglądasz zapisane dane — brak połączenia." banner appears
-- [ ] 3.4 Back online → banner disappears; dismiss `×` hides for session and resets on online
-- [ ] 3.5 DevTools "Skip waiting" → toast appears; "Odśwież" reloads with new SW active
+- [x] 3.3 DevTools Offline toggle → "Przeglądasz zapisane dane — brak połączenia." banner appears
+- [x] 3.4 Back online → banner disappears; dismiss `×` hides for session and resets on online
+- [x] 3.5 DevTools "Skip waiting" → toast appears; "Odśwież" reloads with new SW active

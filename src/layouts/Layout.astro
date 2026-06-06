@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Banner from "@/components/Banner.astro";
 import { missingConfigs } from "@/lib/config-status";
+import OfflineBanner from "@/components/pwa/OfflineBanner";
+import UpdatePwaToast from "@/components/pwa/UpdatePwaToast";
 
 interface Props {
   title?: string;
@@ -20,6 +22,8 @@ const { title = "Vena — Dziennik krwiodawcy" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <OfflineBanner client:load />
+    <UpdatePwaToast client:load />
     {
       missingConfigs.map((cfg) => (
         <Banner variant="error">
