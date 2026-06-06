@@ -20,8 +20,11 @@ const { user } = Astro.locals;
     user ? (
       <div class="flex items-center gap-4">
         <span style="color: rgba(254,202,202,0.55); font-size: 0.75rem;">{user.email}</span>
-        <a href="/dashboard" style="color: #fca5a5;" class="transition-colors hover:text-white">
-          Panel główny
+        <a href="/donations" style="color: #fca5a5;" class="transition-colors hover:text-white">
+          Donacje
+        </a>
+        <a href="/profile" style="color: #fca5a5;" class="transition-colors hover:text-white">
+          Profil
         </a>
         <form method="POST" action="/api/auth/signout">
           <button type="submit" style="color: #fca5a5;" class="transition-colors hover:text-white">
