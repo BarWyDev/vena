@@ -1,7 +1,7 @@
 ---
 change_id: pwa-installable-offline
 title: PWA installable on home screen with offline support
-status: implementing
+status: implemented
 created: 2026-06-06
 updated: 2026-06-06
 archived_at: null

@@ -374,11 +374,11 @@ No migration needed. Users who have never visited will download the SW on their 
 
 #### Automated
 
-- [x] 3.1 `npm run build` succeeds
-- [x] 3.2 `npm run lint` passes — React Compiler rules satisfied
+- [x] 3.1 `npm run build` succeeds — 20eace8
+- [x] 3.2 `npm run lint` passes — React Compiler rules satisfied — 20eace8
 
 #### Manual
 
-- [x] 3.3 DevTools Offline toggle → "Przeglądasz zapisane dane — brak połączenia." banner appears
-- [x] 3.4 Back online → banner disappears; dismiss `×` hides for session and resets on online
-- [x] 3.5 DevTools "Skip waiting" → toast appears; "Odśwież" reloads with new SW active
+- [x] 3.3 DevTools Offline toggle → "Przeglądasz zapisane dane — brak połączenia." banner appears — 20eace8
+- [x] 3.4 Back online → banner disappears; dismiss `×` hides for session and resets on online — 20eace8
+- [x] 3.5 DevTools "Skip waiting" → toast appears; "Odśwież" reloads with new SW active — 20eace8
