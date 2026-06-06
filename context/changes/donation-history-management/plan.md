@@ -58,6 +58,7 @@ Add `getLatestIds()`, `updateDonation()`, and `deleteDonation()` to the donation
 **Intent**: Add the three new domain operations needed by the UI phases. Keep all data access logic in one module.
 
 **Contract**:
+
 - `getLatestIds(donations: DonationRow[]): string[]` — pure function; single pass over the `donated_at desc`-sorted array; returns one `id` per donation type for the first occurrence of each type (at most 3 IDs). Used by `DonationHistory` to decide which rows show the recalculation warning.
 - `updateDonation(supabase: SupabaseClient<Database>, userId: string, id: string, type: DonationType, donatedAt: string): Promise<{ error: PostgrestError | null }>` — updates `type` and `donated_at` for the row matching both `id` and `user_id`.
 - `deleteDonation(supabase: SupabaseClient<Database>, userId: string, id: string): Promise<{ error: PostgrestError | null }>` — deletes the row matching both `id` and `user_id`.
@@ -71,6 +72,7 @@ Both write operations include `.eq("user_id", userId)` as an ownership constrain
 **Intent**: Validate and persist the edited donation record, following the redirect-only API route pattern from `src/pages/api/donations.ts`.
 
 **Contract**: `POST APIRoute`. `const { id } = context.params`. Steps in order:
+
 1. Null-check `createClient()` → redirect `/donations?error=Błąd+konfiguracji+serwera`
 2. `context.locals.user` guard → redirect `/auth/signin`
 3. Read `formData`: `type`, `donated_at`
@@ -87,6 +89,7 @@ Both write operations include `.eq("user_id", userId)` as an ownership constrain
 **Intent**: Delete a single donation owned by the authenticated user. POST-only (HTML form constraint). Mirrors the redirect-only pattern.
 
 **Contract**: `POST APIRoute`. `const { id } = context.params`. Steps:
+
 1. Null-check `createClient()` → redirect `/donations?error=Błąd+konfiguracji+serwera`
 2. `context.locals.user` guard → redirect `/auth/signin`
 3. `deleteDonation(supabase, user.id, id)`
@@ -136,6 +139,7 @@ Build the `/donations/[id]/edit` page and its `DonationEditForm` React component
 **Intent**: Server-fetch the donation by ID, verify it belongs to the current user, and render the edit form. Redirects to `/donations` if the donation is not found or doesn't belong to the user.
 
 **Contract**:
+
 - `const { id } = Astro.params`.
 - `const { user } = Astro.locals`.
 - `createClient(...)` null-check → redirect `/donations`.
@@ -180,6 +184,7 @@ Build `DonationHistory.tsx` with inline delete confirmation and update `donation
 **Contract**: Props `{ donations: DonationRow[], latestIds: string[] }`. State: `confirmDeleteId: string | null`. Internal `latestIdSet = useMemo(() => new Set(latestIds), [latestIds])`.
 
 For each `row` in `donations`:
+
 - Display: `DONATION_TYPE_LABELS[row.type]` and `new Date(row.donated_at + "T00:00:00Z").toLocaleDateString("pl-PL", { timeZone: "UTC" })` — same UTC date rendering pattern as `EligibilityCards`.
 - Normal state (`confirmDeleteId !== row.id`):
   - "Edytuj" — `Button variant="ghost" size="sm" asChild` wrapping `<a href={"/donations/" + row.id + "/edit"}>`.
@@ -198,6 +203,7 @@ Returns `null` when `donations.length === 0` (parent guards this, but defensive)
 **Intent**: Wire in the history section — import `DonationHistory` and `getLatestIds`, handle new URL params (`edited`, `deleted`), render success banners and the history section below the add form.
 
 **Contract**:
+
 - Add imports: `DonationHistory` from `@/components/donations/DonationHistory`; `getLatestIds` from `@/lib/donations`.
 - Add URL param reads: `edited = Astro.url.searchParams.get("edited") === "1"`, `deleted = Astro.url.searchParams.get("deleted") === "1"`.
 - Compute `const latestIds = getLatestIds(donations)` after `donations` is populated.

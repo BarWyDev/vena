@@ -1,0 +1,37 @@
+---
+import Topbar from "@/components/Topbar.astro";
+---
+
+<div
+  class="relative min-h-screen w-full overflow-hidden"
+  style="background-image: linear-gradient(to bottom, #0d0a0a, #160a0a, #0d0a0a);"
+>
+  <!-- Blood-themed ambient glow -->
+  <div
+    class="pointer-events-none absolute top-1/4 -left-24 h-[400px] w-[400px] rounded-full blur-[140px]"
+    style="background: rgba(220, 38, 38, 0.12);"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute top-2/3 -right-16 h-[280px] w-[280px] rounded-full blur-[110px]"
+    style="background: rgba(185, 28, 28, 0.10);"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute top-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full blur-[150px]"
+    style="background: rgba(239, 68, 68, 0.08);"
+  >
+  </div>
+
+  <!-- Subtle dot pattern -->
+  <div
+    class="pointer-events-none absolute inset-0"
+    style="background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 180px 180px, 120px 120px; background-position: 0 0, 45px 55px;"
+  >
+  </div>
+
+  <div class="relative z-10 p-4 sm:p-8">
+    <Topbar />
+    <slot />
+  </div>
+</div>

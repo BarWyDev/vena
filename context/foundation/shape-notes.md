@@ -41,7 +41,7 @@ has no easy way to compute this, so they either arrive too early and are refused
 trip — or wait longer than required and donate less often than they could. Their donation
 history typically lives only on paper or in memory, in no form that drives the calculation.
 
-The insight: the value is the *calculation*, not a reminder. The interval logic is fiddly
+The insight: the value is the _calculation_, not a reminder. The interval logic is fiddly
 enough that a plain calendar alert doesn't capture it, and official systems (e-Krew / RCKiK)
 don't give donors a forward-looking "earliest next date, per donation type" they can act on.
 [Open question: how broadly this generalizes beyond the initial single user — see Open Questions.]
@@ -65,15 +65,18 @@ data-bearing route redirects to login.
 ## Success Criteria
 
 ### Primary
+
 - A donor completes the full flow end-to-end: register → fill profile → add a donation →
   see the earliest next eligible date per donation type → export that date to a calendar
   file — and an automated E2E test covering this path passes.
 
 ### Secondary
+
 - Registration, login, and profile completion take a new donor under 2 minutes.
 - The next-eligible date appears within ~1 second of adding or editing a donation.
 
 ### Guardrails
+
 - The calculator's dates are correct per RCKiK rules (whole blood: 8 weeks for men /
   12 weeks for women; plasma: 2 weeks; platelets: 4 weeks). A wrong date is worse than no app.
 - Donor health data (blood group, Rh, sex, donation history) stays private to the account.
@@ -82,6 +85,7 @@ data-bearing route redirects to login.
 ## Functional Requirements
 
 ### Account & profile
+
 - FR-001: Donor can register with email and password. Priority: must-have
   > Socratic: Counter considered: "local-only on-device data would be cheaper than auth." Resolution: kept; cross-device access and not losing history justify server accounts.
 - FR-002: Donor can log in and log out. Priority: must-have
@@ -90,6 +94,7 @@ data-bearing route redirects to login.
   > Socratic: Counter considered: "only sex affects the interval — blood group/Rh are dead fields in the MVP." Resolution: kept; they are trivial to store, natural on a donor profile, and seed future features. Sex is the only field the calculator reads.
 
 ### Donations
+
 - FR-004: Donor can add a donation record (date + type: whole blood / plasma / platelets). Priority: must-have
   > Socratic: Counter considered: "calc only needs the latest donation per type, so skip a full add flow." Resolution: kept; recording each donation is the natural model and the calc reads the latest.
 - FR-005: Donor can view a list of their own donations. Priority: must-have
@@ -100,16 +105,19 @@ data-bearing route redirects to login.
   > Socratic: Counter considered: "deleting the latest donation silently recomputes an earlier eligible date — confusing." Resolution: kept; the recompute is correct behavior. (Watch: a confirm/guard on delete is worth considering downstream.)
 
 ### Eligibility calculator
+
 - FR-008: Donor sees the earliest next eligible date for each donation type, computed from their last donation, sex, and donation type. Priority: must-have
   > Socratic: Counter considered: "show only the chosen type's date." Resolution: kept per-type; the side-by-side per-type view is the differentiator official systems don't offer.
 - FR-009: Donor can select which donation type they plan to give next. Priority: must-have
   > Socratic: Counter considered: "selection is redundant since all dates are shown." Resolution: kept; the selection drives which date goes into the .ics export.
 
 ### Calendar export
+
 - FR-010: Donor can export the earliest next eligible date as an .ics calendar file. Priority: must-have
   > Socratic: Counter considered: "a displayed date may suffice; defer .ics to v2." Resolution: kept; one-click into the donor's real calendar is the action that makes the app stick.
 
 ### PWA
+
 - FR-011: Donor can install the app on their phone and use it offline after the first load. Priority: must-have
   > Socratic: Counter considered: "service worker + cache + install testing is real cost the calc doesn't strictly need." Resolution: kept; phone-installable and offline-usable is an explicit success criterion.
 
@@ -122,6 +130,7 @@ data-bearing route redirects to login.
 - **Then** they see the earliest next eligible date for each donation type, with the type they selected highlighted
 
 #### Acceptance Criteria
+
 - Dates follow RCKiK rules: whole blood 8 weeks (men) / 12 weeks (women), plasma 2 weeks, platelets 4 weeks, measured from the most recent relevant donation.
 - The next-eligible date appears within ~1 second of adding or editing a donation.
 - With no donations recorded, the donor sees an explanatory empty state, not a blank or error.
@@ -169,4 +178,3 @@ calculation, so the app shows an explanatory empty state rather than a computed 
 
 1. **Are push reminders/notifications in or out of scope?** — The seed notes listed push reminders as out-of-MVP, but it was not confirmed as a locked non-goal during shaping. Owner: user. Resolve before/at PRD. (If out, the .ics export is the sole reminder mechanism; if in, it adds notification scope.)
 2. **How broadly does Vena generalize beyond the initial single user?** — Persona is currently "individual donor / builder is first user." Owner: user. Non-blocking.
-

@@ -2,23 +2,25 @@
 
 ## Status
 
-| Step | Description | Status |
-|---|---|---|
-| 1 | Fix `wrangler.jsonc` | DONE |
-| 2 | Update `.github/workflows/ci.yml` | DONE |
-| 3 | Manual Gate A: Wrangler CLI login | DONE |
-| 4 | Manual Gate B: Cloudflare API token for CI | DONE |
-| 5 | Manual Gate C: Supabase project configuration | DONE |
-| 6 | Set Workers secrets and deploy | DONE |
-| 7 | Verification | DONE |
+| Step | Description                                   | Status |
+| ---- | --------------------------------------------- | ------ |
+| 1    | Fix `wrangler.jsonc`                          | DONE   |
+| 2    | Update `.github/workflows/ci.yml`             | DONE   |
+| 3    | Manual Gate A: Wrangler CLI login             | DONE   |
+| 4    | Manual Gate B: Cloudflare API token for CI    | DONE   |
+| 5    | Manual Gate C: Supabase project configuration | DONE   |
+| 6    | Set Workers secrets and deploy                | DONE   |
+| 7    | Verification                                  | DONE   |
 
 ## Current file state (as of 2026-05-31)
 
 **`wrangler.jsonc`** — updated 2026-05-31:
+
 - `name`: `"vena"`
 - `compatibility_flags`: `["nodejs_compat", "disable_nodejs_process_v2"]`
 
 **`.github/workflows/ci.yml`** — updated 2026-05-31:
+
 - Triggers on `main`
 - `deploy` job added (runs on push to `main`, depends on `ci`)
 
@@ -34,12 +36,13 @@ First production deployment of Vena. The stack (Astro v6 SSR + @astrojs/cloudfla
 
 Two changes:
 
-| Field | Current | New | Reason |
-|---|---|---|---|
-| `name` | `"10x-astro-starter"` | `"vena"` | Workers URL becomes `vena.<account>.workers.dev` |
-| `compatibility_flags` | `["nodejs_compat"]` | `["nodejs_compat", "disable_nodejs_process_v2"]` | Fixes active Astro v6 + middleware rendering bug (GitHub #15434): without this flag, `context.locals.user` silently becomes `[object Object]` in SSR pages |
+| Field                 | Current               | New                                              | Reason                                                                                                                                                     |
+| --------------------- | --------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                | `"10x-astro-starter"` | `"vena"`                                         | Workers URL becomes `vena.<account>.workers.dev`                                                                                                           |
+| `compatibility_flags` | `["nodejs_compat"]`   | `["nodejs_compat", "disable_nodejs_process_v2"]` | Fixes active Astro v6 + middleware rendering bug (GitHub #15434): without this flag, `context.locals.user` silently becomes `[object Object]` in SSR pages |
 
 Result:
+
 ```jsonc
 {
   "$schema": "node_modules/wrangler/config-schema.json",
@@ -63,10 +66,12 @@ Result:
 ## Step 2 — Update `.github/workflows/ci.yml` [DONE]
 
 Two changes to the existing file:
+
 1. `branches: [master]` → `branches: [main]` in both `push` and `pull_request` triggers
 2. Add a `deploy` job (runs on push to `main` only, depends on `ci` passing)
 
 Final workflow:
+
 ```yaml
 name: CI
 
@@ -123,18 +128,22 @@ jobs:
 Wrangler is already installed as a dev dependency (`wrangler ^4.90.0` in `package.json`) — no global install needed.
 
 **Verify the CLI works:**
+
 ```bash
 npx wrangler --version
 # Expected: wrangler 4.x.x
 ```
 
 **Authenticate with Cloudflare (browser-based OAuth):**
+
 ```bash
 npx wrangler login
 ```
+
 A browser tab opens to `dash.cloudflare.com`. Log in and click **Allow**. The token is saved to `~/.config/.wrangler/config.json` — valid for the current machine, no expiry by default.
 
 **Confirm authentication succeeded:**
+
 ```bash
 npx wrangler whoami
 # Expected: You are logged in with an OAuth Token, associated with the email <your@email.com>.
@@ -149,6 +158,7 @@ If `whoami` returns an error, re-run `wrangler login`. This must succeed before 
 This token lets GitHub Actions call `wrangler deploy` without interactive login.
 
 **Create the token:**
+
 1. Go to: `https://dash.cloudflare.com/profile/api-tokens`
 2. Click **Create Token** → choose the **"Edit Cloudflare Workers"** template
 3. Under **Permissions**, verify these are pre-filled:
@@ -160,11 +170,13 @@ This token lets GitHub Actions call `wrangler deploy` without interactive login.
 7. **Copy the token value** — it is shown exactly once; copy it now
 
 **Find your Account ID:**
+
 - Go to: `https://dash.cloudflare.com` → Workers & Pages
 - Your **Account ID** appears in the right sidebar under "Account details"
 - Copy it (format: 32-character hex string)
 
 **Add both to GitHub repository secrets:**
+
 1. Go to: `https://github.com/<owner>/vena/settings/secrets/actions`
 2. Click **New repository secret** and add:
    - `CLOUDFLARE_API_TOKEN` = (token from above)
@@ -234,6 +246,7 @@ npx wrangler deploy
 ```
 
 Expected output:
+
 ```
 Deployed vena triggers (X.XX sec)
   https://vena.<account>.workers.dev
@@ -246,12 +259,15 @@ Capture the URL — go back to Step 5c and set **Site URL** to this exact value,
 ## Step 7 — Verification [DONE]
 
 **Automated:**
+
 ```bash
 npx wrangler tail --format pretty
 ```
+
 Leave running while smoke-testing. Watch for 5xx errors or CPU-time warnings.
 
 **Smoke test sequence (user in browser):**
+
 1. Open `https://vena.<account>.workers.dev` — homepage loads
 2. Navigate to `/auth/signup` — form renders
 3. Register with a test email
@@ -266,17 +282,17 @@ Leave running while smoke-testing. Watch for 5xx errors or CPU-time warnings.
 
 ## What this deploy covers / does not cover
 
-| Covered | Not covered |
-|---|---|
-| Auth routes: signin, signup, confirm-email | Custom domain |
-| Protected route: /dashboard | PR preview environments |
-| Supabase email+password auth | Logpush / persistent log drain |
-| Auto-deploy on push to `main` via CI | Donation CRUD (not built yet) |
+| Covered                                    | Not covered                    |
+| ------------------------------------------ | ------------------------------ |
+| Auth routes: signin, signup, confirm-email | Custom domain                  |
+| Protected route: /dashboard                | PR preview environments        |
+| Supabase email+password auth               | Logpush / persistent log drain |
+| Auto-deploy on push to `main` via CI       | Donation CRUD (not built yet)  |
 
 ## Critical files modified
 
-| File | Change |
-|---|---|
-| `wrangler.jsonc` | Worker name (`10x-astro-starter` → `vena`) + compatibility flag fix |
-| `.github/workflows/ci.yml` | Branch rename (`master` → `main`) + deploy job added |
-| `context/deployment/deploy-plan.md` | Created — this file |
+| File                                | Change                                                              |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `wrangler.jsonc`                    | Worker name (`10x-astro-starter` → `vena`) + compatibility flag fix |
+| `.github/workflows/ci.yml`          | Branch rename (`master` → `main`) + deploy job added                |
+| `context/deployment/deploy-plan.md` | Created — this file                                                 |

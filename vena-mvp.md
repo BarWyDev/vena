@@ -34,5 +34,5 @@ Krwiodawcy nie pamiętają, kiedy mogą oddać kolejną krew. Odstępy między d
 - po dodaniu donacji aplikacja w < 1 sekundę pokazuje datę następnej możliwej donacji dla każdego typu
 - kalkulator zgodny z wytycznymi RCKiK (krew pełna: M 8 tyg / K 12 tyg, osocze: 2 tyg, płytki: 4 tyg)
 - użytkownik może pobrać plik `.ics` i otworzyć go w kalendarzu telefonu jednym kliknięciem
-- test E2E przechodzi: *rejestracja → uzupełnienie profilu → dodanie donacji → wyświetlenie kolejnej daty → eksport do kalendarza*
+- test E2E przechodzi: _rejestracja → uzupełnienie profilu → dodanie donacji → wyświetlenie kolejnej daty → eksport do kalendarza_
 - aplikacja działa offline po pierwszym załadowaniu (PWA install + service worker)

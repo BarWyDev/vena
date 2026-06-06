@@ -1,4 +1,3 @@
-
 ---
 project: vena
 researched_at: 2026-05-29
@@ -24,14 +23,14 @@ One pre-existing issue must be resolved before first deploy: `wrangler.jsonc` ha
 
 ## Platform Comparison
 
-| Platform | CLI-first | Managed/Serverless | Agent docs | Deploy API | MCP | Pass count |
-|---|---|---|---|---|---|---|
-| **Cloudflare Workers** | Pass | Pass | Pass | Pass | Pass | **5** |
-| **Render** | Pass | Pass | Pass | Pass | Pass | **5** |
-| **Railway** | Partial | Pass | Pass | Pass | Pass | **4 + 1P** |
-| **Netlify** | Partial | Pass | Pass | Pass | Pass | **4 + 1P** |
-| **Vercel** | Partial | Pass | Pass | Pass | Partial | **3 + 2P** |
-| **Fly.io** | Partial | Pass | Partial | Pass | Partial | **2 + 3P** |
+| Platform               | CLI-first | Managed/Serverless | Agent docs | Deploy API | MCP     | Pass count |
+| ---------------------- | --------- | ------------------ | ---------- | ---------- | ------- | ---------- |
+| **Cloudflare Workers** | Pass      | Pass               | Pass       | Pass       | Pass    | **5**      |
+| **Render**             | Pass      | Pass               | Pass       | Pass       | Pass    | **5**      |
+| **Railway**            | Partial   | Pass               | Pass       | Pass       | Pass    | **4 + 1P** |
+| **Netlify**            | Partial   | Pass               | Pass       | Pass       | Pass    | **4 + 1P** |
+| **Vercel**             | Partial   | Pass               | Pass       | Pass       | Partial | **3 + 2P** |
+| **Fly.io**             | Partial   | Pass               | Partial    | Pass       | Partial | **2 + 3P** |
 
 **Notes per criterion:**
 
@@ -106,16 +105,16 @@ While investigating, the team notices a second class of failures in Cloudflare's
 
 ## Risk Register
 
-| Risk | Source | Likelihood | Impact | Mitigation |
-|---|---|---|---|---|
-| `nodejs_compat` + middleware bug renders `[object Object]` on SSR pages (GitHub #15434) | Research finding | **H** (already triggered by current config) | **H** | Add `"disable_nodejs_process_v2"` to `compatibility_flags` in `wrangler.jsonc` before first deploy |
-| workerd runtime lacks Node.js APIs (`fs`, native modules, CJS `require()`) | Devil's advocate | M | H | Test each new npm dependency with `wrangler dev` before committing; prefer ESM packages; check compatibility in Cloudflare's module compatibility docs |
-| Free tier 10ms CPU limit causes silent 503s on complex SSR pages | Devil's advocate | M | M | Monitor CPU time in Cloudflare dashboard after launch; upgrade to Workers Bundled ($5/month, 30ms CPU/invocation) if any page approaches the limit |
-| `astro:env/server` schema gap: new secrets are silently `undefined` at runtime | Unknown unknowns | M | M | Any new `wrangler secret put` must be paired with an `envField` declaration in `astro.config.mjs`; add this check to the PR checklist |
-| No built-in PR preview URLs | Devil's advocate | M | L | Add `[env.preview]` environment to `wrangler.jsonc`; wire `wrangler deploy --env preview` to CI on pull requests |
-| `wrangler tail` session limit (5 min) blocks async log monitoring | Unknown unknowns | M | L | Enable Logpush to R2 or a third-party log drain for persistent structured logs |
-| `disable_nodejs_process_v2` workaround deprecated in a future compatibility date bump | Pre-mortem | L | H | Track Cloudflare compatibility dates changelog; test middleware behavior after each compatibility date upgrade |
-| Workers vs Pages command confusion in CI/CD setup | Unknown unknowns | M | M | Deploy command is `wrangler deploy` (not `wrangler pages deploy`); this is confirmed by `"main"` field in `wrangler.jsonc` |
+| Risk                                                                                    | Source           | Likelihood                                  | Impact | Mitigation                                                                                                                                             |
+| --------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `nodejs_compat` + middleware bug renders `[object Object]` on SSR pages (GitHub #15434) | Research finding | **H** (already triggered by current config) | **H**  | Add `"disable_nodejs_process_v2"` to `compatibility_flags` in `wrangler.jsonc` before first deploy                                                     |
+| workerd runtime lacks Node.js APIs (`fs`, native modules, CJS `require()`)              | Devil's advocate | M                                           | H      | Test each new npm dependency with `wrangler dev` before committing; prefer ESM packages; check compatibility in Cloudflare's module compatibility docs |
+| Free tier 10ms CPU limit causes silent 503s on complex SSR pages                        | Devil's advocate | M                                           | M      | Monitor CPU time in Cloudflare dashboard after launch; upgrade to Workers Bundled ($5/month, 30ms CPU/invocation) if any page approaches the limit     |
+| `astro:env/server` schema gap: new secrets are silently `undefined` at runtime          | Unknown unknowns | M                                           | M      | Any new `wrangler secret put` must be paired with an `envField` declaration in `astro.config.mjs`; add this check to the PR checklist                  |
+| No built-in PR preview URLs                                                             | Devil's advocate | M                                           | L      | Add `[env.preview]` environment to `wrangler.jsonc`; wire `wrangler deploy --env preview` to CI on pull requests                                       |
+| `wrangler tail` session limit (5 min) blocks async log monitoring                       | Unknown unknowns | M                                           | L      | Enable Logpush to R2 or a third-party log drain for persistent structured logs                                                                         |
+| `disable_nodejs_process_v2` workaround deprecated in a future compatibility date bump   | Pre-mortem       | L                                           | H      | Track Cloudflare compatibility dates changelog; test middleware behavior after each compatibility date upgrade                                         |
+| Workers vs Pages command confusion in CI/CD setup                                       | Unknown unknowns | M                                           | M      | Deploy command is `wrangler deploy` (not `wrangler pages deploy`); this is confirmed by `"main"` field in `wrangler.jsonc`                             |
 
 ---
 
@@ -124,26 +123,31 @@ While investigating, the team notices a second class of failures in Cloudflare's
 The project is already configured for Cloudflare Workers deployment. These are the steps to ship the first production deploy:
 
 1. **Fix the active middleware bug first** — add `"disable_nodejs_process_v2"` to `compatibility_flags` in `wrangler.jsonc`:
+
    ```json
    "compatibility_flags": ["nodejs_compat", "disable_nodejs_process_v2"]
    ```
 
 2. **Authenticate with Cloudflare** (one-time, browser-based):
+
    ```bash
    npx wrangler login
    ```
 
 3. **Set production secrets** (run each command and paste the value when prompted):
+
    ```bash
    npx wrangler secret put SUPABASE_URL
    npx wrangler secret put SUPABASE_KEY
    ```
 
 4. **Build and deploy**:
+
    ```bash
    npm run build
    npx wrangler deploy
    ```
+
    The deploy command outputs a `workers.dev` URL. Verify the auth flow and eligibility calculator on this URL before adding a custom domain.
 
 5. **Tail live logs** to verify no 503s or rendering errors after deploy:
@@ -158,6 +162,7 @@ For CI (GitHub Actions): add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` 
 ## Out of Scope
 
 The following were not evaluated in this research:
+
 - Docker image configuration
 - CI/CD pipeline setup (covered by GitHub Actions — `.github/workflows/ci.yml` already exists)
 - Production-scale architecture (multi-region, HA, DR)

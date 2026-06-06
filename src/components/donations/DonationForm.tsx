@@ -36,7 +36,7 @@ export default function DonationForm({ serverError, added }: Props) {
       />
 
       <div>
-        <label htmlFor="donated_at" className="mb-1 block text-sm text-blue-100/80">
+        <label htmlFor="donated_at" className="mb-1 block text-sm" style={{ color: "rgba(254,202,202,0.7)" }}>
           Data donacji
         </label>
         <input
@@ -46,7 +46,7 @@ export default function DonationForm({ serverError, added }: Props) {
           required
           max={today}
           defaultValue={today}
-          className="w-full appearance-none rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-white transition-colors focus:ring-2 focus:ring-purple-400 focus:outline-none"
+          className="w-full appearance-none rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white transition-colors focus:ring-2 focus:ring-red-700 focus:outline-none"
         />
       </div>
 

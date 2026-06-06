@@ -6,7 +6,7 @@ Build the donor profile page (roadmap **S-01**, PRD **FR-003**): a logged-in don
 
 ## Current State Analysis
 
-- **Schema exists (F-01 complete).** `public.profiles` has `user_id` (PK → `auth.users`, `on delete cascade`), three **nullable** enum columns — `sex` (`male`/`female`), `blood_group` (`A`/`B`/`AB`/`O`), `rh` (`positive`/`negative`) — and `created_at`. RLS confines every row to its owner via `(select auth.uid()) = user_id` on all four commands. The migration comment states the row is *"created lazily by S-01"* — **this plan owns the first insert**. See `supabase/migrations/20260603163127_init_profiles_donations.sql:30-36`.
+- **Schema exists (F-01 complete).** `public.profiles` has `user_id` (PK → `auth.users`, `on delete cascade`), three **nullable** enum columns — `sex` (`male`/`female`), `blood_group` (`A`/`B`/`AB`/`O`), `rh` (`positive`/`negative`) — and `created_at`. RLS confines every row to its owner via `(select auth.uid()) = user_id` on all four commands. The migration comment states the row is _"created lazily by S-01"_ — **this plan owns the first insert**. See `supabase/migrations/20260603163127_init_profiles_donations.sql:30-36`.
 - **Typed bindings exist.** `src/db/database.types.ts` exports `Database`; enum unions and the `profiles` Row/Insert/Update shapes are generated. `Constants.public.Enums` (`database.types.ts:227-239`) lists the runtime enum values — usable to drive `<option>` lists.
 - **Auth-page pattern to mirror.** `src/pages/auth/signin.astro` renders a React form `client:load` inside `Layout`; `SignInForm.tsx` validates client-side then POSTs (`method="POST" action="/api/auth/signin"`); `src/pages/api/auth/signin.ts` null-checks `createClient()`, runs the op, and **redirects on both error (`?error=…`) and success** (`signin.ts:11-19`). This is the exact shape `/profile` + `/api/profile` follow.
 - **Middleware contract.** `src/middleware.ts` sets `context.locals.user` from `supabase.auth.getUser()` and gates any path in `PROTECTED_ROUTES` (currently `["/dashboard"]`), redirecting unauthenticated users to `/auth/signin`. Pages read `Astro.locals.user`; AGENTS.md forbids calling `getUser()` in pages.
@@ -26,7 +26,7 @@ A logged-in donor visiting `/profile` sees a Polish-language form pre-filled wit
 - `sex` is the only field the calculator consumes; `blood_group`/`rh` are stored per FR-003 but unused — drives the "only sex required" policy (`migration:26-27`).
 - API routes redirect, never return JSON (AGENTS.md hard rule; `signin.ts:11-19`).
 - `Constants.public.Enums` gives runtime enum arrays for building option lists without hardcoding (`database.types.ts:231-238`).
-- Gating must run *after* `/profile` itself is exempt from the redirect, or it self-loops — handled by checking the target path in Phase 3.
+- Gating must run _after_ `/profile` itself is exempt from the redirect, or it self-loops — handled by checking the target path in Phase 3.
 
 ## What We're NOT Doing
 
@@ -61,6 +61,7 @@ Create the shared profile module (typed accessors + Polish label maps) and the `
 **Intent**: One source of truth for reading a donor's profile, deciding completeness, and mapping enum values to Polish display strings. Consumed by the page (Phase 2), the API route (below), and the middleware gate (Phase 3).
 
 **Contract**:
+
 - `getProfile(supabase, userId): Promise<ProfileRow | null>` — selects the single `profiles` row for the user (returns `null` when none exists). Typed against `Database["public"]["Tables"]["profiles"]["Row"]`.
 - `isProfileComplete(profile): boolean` — true iff `profile?.sex` is set (the only calculator-required field).
 - Polish label maps for each enum, keyed by the English value, e.g. `SEX_LABELS`, `BLOOD_GROUP_LABELS`, `RH_LABELS`. Source the keys from `Constants.public.Enums` (`database.types.ts:231-238`) so they stay in sync with the schema. Suggested Polish strings: sex `male→"Mężczyzna"`, `female→"Kobieta"`; rh `positive→"Rh+"`, `negative→"Rh−"`; blood group A/B/AB/O as-is.

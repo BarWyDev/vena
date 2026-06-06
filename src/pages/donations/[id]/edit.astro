@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import AuthShell from "@/components/AuthShell.astro";
 import DonationEditForm from "@/components/donations/DonationEditForm";
 import { createClient } from "@/lib/supabase";
 
@@ -23,14 +24,18 @@ const error = Astro.url.searchParams.get("error");
 ---
 
 <Layout title="Edytuj donację">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+  <AuthShell>
+    <div
+      class="mx-auto mt-6 w-full max-w-sm rounded-2xl p-8 text-white"
+      style="border: 1px solid rgba(220,38,38,0.15); background: rgba(255,255,255,0.03); backdrop-filter: blur(16px);"
+    >
       <h1
-        class="mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
+        class="mb-6 text-center text-2xl font-bold"
+        style="background: linear-gradient(135deg, #fecaca 0%, #f87171 40%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
       >
         Edytuj donację
       </h1>
       {data && <DonationEditForm donation={data} serverError={error} client:load />}
     </div>
-  </div>
+  </AuthShell>
 </Layout>

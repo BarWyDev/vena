@@ -80,6 +80,7 @@ Add Vitest, write the pure `calculateEligibility` function, and prove all RCKiK 
 **Intent**: Single source of truth for RCKiK eligibility interval logic. Pure function — no Supabase, no Astro, no side effects. Imported by the Astro page (server-side computation) and the test suite.
 
 **Contract**:
+
 - Imports `Database` from `@/db/database.types` for type derivation only.
 - Exports `DonationType` = `Database["public"]["Enums"]["donation_type"]`, `Sex` = `Database["public"]["Enums"]["sex"]`, `EligibilityResult` = `Record<DonationType, string | null>`.
 - Exports `DONATION_TYPES: DonationType[]` = `["whole_blood", "plasma", "platelets"]` — canonical display order.
@@ -93,6 +94,7 @@ Add Vitest, write the pure `calculateEligibility` function, and prove all RCKiK 
 **Intent**: Prove all six RCKiK interval combinations and two edge cases using fixed input dates — deterministic and independent of system clock.
 
 **Contract**: Eight `it` cases using fixed input `"2026-01-01"` and the following expected outputs (verified by hand and UTC arithmetic):
+
 - `whole_blood` + `male` → `"2026-02-26"` (56 days)
 - `whole_blood` + `female` → `"2026-03-26"` (84 days)
 - `plasma` + `male` → `"2026-01-15"` (14 days)
@@ -133,6 +135,7 @@ Build the typed data accessors for `donations`, the POST API route that inserts 
 **Intent**: Typed DB accessors and presentation helpers for the donations domain — consumed by the page, the API route, and the UI components.
 
 **Contract**:
+
 - `DonationRow` = `Database["public"]["Tables"]["donations"]["Row"]`.
 - `getDonations(supabase: SupabaseClient<Database>, userId: string): Promise<DonationRow[]>` — selects all rows for the user ordered by `donated_at desc`. Returns `[]` on Supabase error (consistent with `getProfile`'s null-safe pattern).
 - `getLatestPerType(donations: DonationRow[]): Partial<Record<DonationType, string>>` — pure function; for each type, picks the first (most recent, given `donated_at desc` ordering) `donated_at` string. Caller passes the already-sorted result of `getDonations`.
@@ -146,6 +149,7 @@ Build the typed data accessors for `donations`, the POST API route that inserts 
 **Intent**: Validate and persist a donation record, following the redirect-only API route pattern from `src/pages/api/profile.ts`.
 
 **Contract**: `POST APIRoute`. Steps in order:
+
 1. Null-check `createClient()` → redirect `/donations?error=…` if absent.
 2. Read `context.locals.user` → redirect `/auth/signin` if absent.
 3. Read `formData`: `type`, `donated_at`.
@@ -197,6 +201,7 @@ Build the three UI layers — `DonationForm`, `EligibilityCards`, `donations.ast
 **Intent**: The interactive add-donation form — mirrors `ProfileForm.tsx` in structure. Always visible on the page regardless of empty/populated state.
 
 **Contract**: Props `{ serverError?: string | null, added?: boolean }`. Renders `method="POST" action="/api/donations"` form (`noValidate`) containing:
+
 - `SelectField` for `type` (name="type", required, options from `DONATION_TYPE_LABELS` + `DONATION_TYPES`, Polish placeholder e.g. "Wybierz typ…", icon `Droplet` from lucide-react).
 - Native `<input type="date" name="donated_at" required>` with `max` and `defaultValue` both set to today's ISO date (computed at render time as `new Date().toISOString().split("T")[0]`). Styled with `inputBase` class to match `SelectField`'s glass input.
 - `ServerError` for `serverError` prop.
@@ -211,6 +216,7 @@ Build the three UI layers — `DonationForm`, `EligibilityCards`, `donations.ast
 **Intent**: Render three clickable glass cards showing the earliest eligible date per donation type. Card click selects a type (highlights the card) and updates the URL `?type=` param so S-04's export button can read it without a page reload.
 
 **Contract**: Props `{ eligibility: EligibilityResult, initialSelectedType: DonationType | null }`. State: `selectedType: DonationType | null` initialized from `initialSelectedType`. Renders one `<button type="button">` per entry in `DONATION_TYPES`:
+
 - Card content: Polish type name (`DONATION_TYPE_LABELS[type]`), earliest date formatted with `toLocaleDateString("pl-PL")` or "Brak danych" when `null`.
 - Selected card visual: additional ring/border (e.g. `ring-1 ring-purple-400/60 border-purple-400/50`) matching the existing glass-card aesthetic.
 - Click handler: `setSelectedType(type)` + `window.history.replaceState(null, "", "/donations?type=" + type)`.
@@ -222,6 +228,7 @@ Build the three UI layers — `DonationForm`, `EligibilityCards`, `donations.ast
 **Intent**: Server-fetch profile + donations, compute eligibility, render empty or populated state and pass computed results to `client:load` React components.
 
 **Contract**:
+
 - Reads `Astro.locals.user` (never `getUser()`).
 - Creates `supabase` client, calls `getProfile(supabase, user.id)` and `getDonations(supabase, user.id)` in parallel (`Promise.all`).
 - Calls `getLatestPerType(donations)` then `calculateEligibility(latestPerType, profile.sex)` when `profile?.sex` is set.

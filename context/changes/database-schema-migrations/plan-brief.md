@@ -16,16 +16,16 @@ A migration creates four enums + both tables with RLS and owner-only policies; `
 
 ## Key Decisions Made
 
-| Decision | Choice | Why (1 sentence) | Source |
-| --- | --- | --- | --- |
-| Categorical fields | Postgres native ENUM types | Strongest integrity + clean TS unions; RCKiK values are fixed so low churn | Plan |
-| profiles ↔ auth.users | `user_id` PK, created lazily by S-01 | Simplest 1:1; the profile page owns creation and the sex-gating | Plan |
-| `sex` nullability | Nullable, enforced in app/UI | Lets a profile exist incrementally; matches S-01's planned UI gating | Plan |
-| `blood_group` / `rh` | Nullable, typed, optional | Honors FR-003 (storable) without blocking profile completion | Plan |
-| TypeScript types | Generate now + type the client | Every later slice gets typed queries from day one | Plan |
-| Row metadata | `id` + `created_at`; donations keep `donated_at` | Stable row identity for edit/delete; separates event date from insert time | Plan |
-| Migration delivery | Local-first, manual `db push`, no seed | Matches infrastructure.md's manual-coordination stance; agent never auto-mutates prod | Plan |
-| RLS verification | Manual two-user check + SQL assertions | Proves the privacy NFR now without standing up a test framework | Plan |
+| Decision              | Choice                                           | Why (1 sentence)                                                                      | Source |
+| --------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------- | ------ |
+| Categorical fields    | Postgres native ENUM types                       | Strongest integrity + clean TS unions; RCKiK values are fixed so low churn            | Plan   |
+| profiles ↔ auth.users | `user_id` PK, created lazily by S-01             | Simplest 1:1; the profile page owns creation and the sex-gating                       | Plan   |
+| `sex` nullability     | Nullable, enforced in app/UI                     | Lets a profile exist incrementally; matches S-01's planned UI gating                  | Plan   |
+| `blood_group` / `rh`  | Nullable, typed, optional                        | Honors FR-003 (storable) without blocking profile completion                          | Plan   |
+| TypeScript types      | Generate now + type the client                   | Every later slice gets typed queries from day one                                     | Plan   |
+| Row metadata          | `id` + `created_at`; donations keep `donated_at` | Stable row identity for edit/delete; separates event date from insert time            | Plan   |
+| Migration delivery    | Local-first, manual `db push`, no seed           | Matches infrastructure.md's manual-coordination stance; agent never auto-mutates prod | Plan   |
+| RLS verification      | Manual two-user check + SQL assertions           | Proves the privacy NFR now without standing up a test framework                       | Plan   |
 
 ## Scope
 
@@ -39,11 +39,11 @@ One ordered SQL migration (enums → tables → RLS). RLS uses the canonical `au
 
 ## Phases at a Glance
 
-| Phase | What it delivers | Key risk |
-| --- | --- | --- |
+| Phase                     | What it delivers                                  | Key risk                                                           |
+| ------------------------- | ------------------------------------------------- | ------------------------------------------------------------------ |
 | 1. Schema & RLS migration | Enums + tables + owner-only RLS, verified locally | Incomplete `WITH CHECK` clause leaving cross-owner writes possible |
-| 2. Typed DB bindings | Generated `database.types.ts` + typed client | gen-types CLI flag drift; regeneration discipline |
-| 3. Remote application | Migration pushed + verified on remote | `db push` mutates prod and does not auto-roll-back |
+| 2. Typed DB bindings      | Generated `database.types.ts` + typed client      | gen-types CLI flag drift; regeneration discipline                  |
+| 3. Remote application     | Migration pushed + verified on remote             | `db push` mutates prod and does not auto-roll-back                 |
 
 **Prerequisites:** Supabase CLI available (dev dep ✓); a linked remote project ref for Phase 3.
 **Estimated effort:** ~1 session across 3 phases (small, foundation-level).

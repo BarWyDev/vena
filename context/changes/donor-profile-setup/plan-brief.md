@@ -16,16 +16,16 @@ A donor visits `/profile`, sees a Polish form prefilled with any saved values, p
 
 ## Key Decisions Made
 
-| Decision                | Choice                                                        | Why (1 sentence)                                                           | Source |
-| ----------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- | ------ |
-| Entry point             | New `/profile` page; dashboard links to it                   | Clean per-page separation; completeness enforced by gating, not redirect.  | Plan   |
-| Sex gating scope        | Reusable completeness helper + redirect incomplete donors    | Delivers roadmap's gating intent now and hands S-02 a ready guard.         | Plan   |
-| Enum input style        | Native styled `<select>` dropdowns                           | Zero new deps, accessible, fine for 2–4 options each.                      | Plan   |
-| Required fields         | Only `sex` required; blood group + Rh optional               | Matches nullable schema and FR-003 — sex is the only calculator input.     | Plan   |
-| Save shape              | Single upsert keyed on `user_id`; page prefills existing row | One code path matching the "lazy create" design; no create/edit branching. | Plan   |
-| Validation              | Client guard + server redirect with `?error` (mirrors auth)  | Defense in depth, reuses `ServerError`, works without JS.                  | Plan   |
-| Success UX              | Redirect to `/profile?saved=1` with a success banner         | Consistent with redirect-not-JSON rule; confirms saved state.             | Plan   |
-| Verification            | `lint` + `build` + scripted manual checklist                 | Matches repo reality (no test runner); test framework deferred to S-02.    | Plan   |
+| Decision         | Choice                                                       | Why (1 sentence)                                                           | Source |
+| ---------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- | ------ |
+| Entry point      | New `/profile` page; dashboard links to it                   | Clean per-page separation; completeness enforced by gating, not redirect.  | Plan   |
+| Sex gating scope | Reusable completeness helper + redirect incomplete donors    | Delivers roadmap's gating intent now and hands S-02 a ready guard.         | Plan   |
+| Enum input style | Native styled `<select>` dropdowns                           | Zero new deps, accessible, fine for 2–4 options each.                      | Plan   |
+| Required fields  | Only `sex` required; blood group + Rh optional               | Matches nullable schema and FR-003 — sex is the only calculator input.     | Plan   |
+| Save shape       | Single upsert keyed on `user_id`; page prefills existing row | One code path matching the "lazy create" design; no create/edit branching. | Plan   |
+| Validation       | Client guard + server redirect with `?error` (mirrors auth)  | Defense in depth, reuses `ServerError`, works without JS.                  | Plan   |
+| Success UX       | Redirect to `/profile?saved=1` with a success banner         | Consistent with redirect-not-JSON rule; confirms saved state.              | Plan   |
+| Verification     | `lint` + `build` + scripted manual checklist                 | Matches repo reality (no test runner); test framework deferred to S-02.    | Plan   |
 
 ## Scope
 
@@ -39,11 +39,11 @@ Mirror the auth pattern exactly: a thin `profile.astro` page fetches the row and
 
 ## Phases at a Glance
 
-| Phase                          | What it delivers                                              | Key risk                                          |
-| ------------------------------ | ------------------------------------------------------------ | ------------------------------------------------- |
-| 1. Profile data layer + API    | `lib/profile.ts` + `/api/profile` upsert with sex validation | Upsert clobbers untouched columns if not prefilled |
-| 2. Profile page + form UI      | `/profile` page, form, selects, banners, route protection    | Enum select styling / blank-optional → null handling |
-| 3. Completeness gating         | Middleware redirect of incomplete donors to `/profile`       | Redirect loop if `/profile` not exempted          |
+| Phase                       | What it delivers                                             | Key risk                                             |
+| --------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| 1. Profile data layer + API | `lib/profile.ts` + `/api/profile` upsert with sex validation | Upsert clobbers untouched columns if not prefilled   |
+| 2. Profile page + form UI   | `/profile` page, form, selects, banners, route protection    | Enum select styling / blank-optional → null handling |
+| 3. Completeness gating      | Middleware redirect of incomplete donors to `/profile`       | Redirect loop if `/profile` not exempted             |
 
 **Prerequisites:** F-01 (`database-schema-migrations`) complete — schema + RLS live. ✅
 **Estimated effort:** ~1–2 sessions across 3 phases.

@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import AuthShell from "@/components/AuthShell.astro";
 import DonationForm from "@/components/donations/DonationForm";
 import EligibilityCards from "@/components/donations/EligibilityCards";
 import { createClient } from "@/lib/supabase";
@@ -38,8 +39,11 @@ const latestIds = getLatestIds(donations);
 ---
 
 <Layout title="Moje donacje">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div class="w-full max-w-2xl rounded-2xl border border-white/10 bg-white/10 p-8 text-white backdrop-blur-xl">
+  <AuthShell>
+    <div
+      class="mx-auto mt-6 w-full max-w-2xl rounded-2xl p-8 text-white"
+      style="border: 1px solid rgba(220,38,38,0.15); background: rgba(255,255,255,0.03); backdrop-filter: blur(16px);"
+    >
       {
         edited && (
           <p class="mb-4 rounded-lg border border-green-500/30 bg-green-900/30 px-3 py-2 text-sm text-green-300">
@@ -56,14 +60,15 @@ const latestIds = getLatestIds(donations);
       }
 
       <h1
-        class="mb-6 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-center text-2xl font-bold text-transparent"
+        class="mb-6 text-center text-2xl font-bold"
+        style="background: linear-gradient(135deg, #fecaca 0%, #f87171 40%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
       >
         Moje donacje
       </h1>
 
       {
         !hasDonations && (
-          <p class="mb-6 text-center text-sm text-blue-100/70">
+          <p class="mb-6 text-center text-sm" style="color: rgba(254,202,202,0.65);">
             Dodaj pierwszą donację, aby zobaczyć kiedy możesz oddać krew następnym razem.
           </p>
         )
@@ -82,11 +87,13 @@ const latestIds = getLatestIds(donations);
       {
         hasDonations && (
           <>
-            <h2 class="mt-8 mb-4 text-sm font-semibold text-blue-100/70">Historia donacji</h2>
+            <h2 class="mt-8 mb-4 text-sm font-semibold" style="color: rgba(254,202,202,0.7);">
+              Historia donacji
+            </h2>
             <DonationHistory donations={donations} latestIds={latestIds} client:load />
           </>
         )
       }
     </div>
-  </div>
+  </AuthShell>
 </Layout>
