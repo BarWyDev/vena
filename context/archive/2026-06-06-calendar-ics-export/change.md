@@ -1,10 +1,10 @@
 ---
 change_id: calendar-ics-export
 title: Export eligible donation date as .ics calendar file
-status: impl_reviewed
+status: archived
 created: 2026-06-06
 updated: 2026-06-06
-archived_at: null
+archived_at: 2026-06-06T18:36:03Z
 ---
 
 ## Notes

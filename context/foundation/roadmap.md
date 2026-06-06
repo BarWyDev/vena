@@ -3,7 +3,7 @@ project: "Vena"
 version: 1
 status: draft
 created: 2026-06-02
-updated: 2026-06-02
+updated: 2026-06-06
 prd_version: 1
 main_goal: market-feedback
 top_blocker: time
@@ -33,7 +33,7 @@ Dawcy krwi nie potrafią niezawodnie stwierdzić, kiedy mogą oddać krew nastę
 | S-01 | donor-profile-setup         | uzupełnić profil (płeć, grupa krwi, Rh)                 | F-01          | FR-001, FR-002, FR-003         | proposed |
 | S-02 | eligibility-calculator-view | dodać donację i zobaczyć daty kwalifikowalności per typ | F-01, S-01    | FR-004, FR-008, FR-009, US-01  | proposed |
 | S-03 | donation-history-management | przeglądać listę donacji, edytować i usuwać wpisy       | S-02          | FR-005, FR-006, FR-007         | proposed |
-| S-04 | calendar-ics-export         | wyeksportować wybraną datę do kalendarza (.ics)         | S-02          | FR-010                         | proposed |
+| S-04 | calendar-ics-export         | wyeksportować wybraną datę do kalendarza (.ics)         | S-02          | FR-010                         | done     |
 | S-05 | pwa-installable-offline     | zainstalować aplikację na telefonie i używać offline    | —             | FR-011                         | ready    |
 
 ## Streams
@@ -122,7 +122,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Format .ics musi importować bez ręcznego edytowania w Google, Apple i Outlook (NFR). Edge-case'y interoperabilności (strefa czasowa, format DTSTART) mogą pojawić się późno — przetestować na realnych klientach kalendarza przed release.
-- **Status:** proposed
+- **Status:** done
 
 ### S-05: PWA installable + offline
 
@@ -169,3 +169,5 @@ Foundations below assume these are present and do NOT re-scaffold them.
 ## Done
 
 (Empty on first generation. `/10x-archive` appends an entry here when a change matching a roadmap item is archived.)
+
+- **S-04: Dawca może wyeksportować najwcześniejszą datę wybranego typu donacji jako plik .ics do kalendarza.** — Archived 2026-06-06 → `context/archive/2026-06-06-calendar-ics-export/`. Lesson: —.
