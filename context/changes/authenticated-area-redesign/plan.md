@@ -355,24 +355,24 @@ No automated test suite is configured (AGENTS.md). Verification is `npm run lint
 
 #### Automated
 
-- [x] 3.1 Linting passes: `npm run lint`
-- [x] 3.2 Build passes: `npm run build`
-- [x] 3.3 No blue/purple tokens in donation/profile components (`grep -rn "blue-\|purple-" src/components/donations src/components/profile`)
+- [x] 3.1 Linting passes: `npm run lint` — c207ea7
+- [x] 3.2 Build passes: `npm run build` — c207ea7
+- [x] 3.3 No blue/purple tokens in donation/profile components (`grep -rn "blue-\|purple-" src/components/donations src/components/profile`) — c207ea7
 
 #### Manual
 
-- [x] 3.4 All forms/lists/cards render red theme with no leftover blue/purple
-- [x] 3.5 Eligibility card selected-state is red and still updates `?type=` URL
-- [x] 3.6 Success banners green, error/validation red
+- [x] 3.4 All forms/lists/cards render red theme with no leftover blue/purple — c207ea7
+- [x] 3.5 Eligibility card selected-state is red and still updates `?type=` URL — c207ea7
+- [x] 3.6 Success banners green, error/validation red — c207ea7
 
 ### Phase 4: Docs & Cleanup
 
 #### Automated
 
-- [ ] 4.1 `grep -rn "bg-cosmic" src/` returns nothing
-- [ ] 4.2 Linting passes: `npm run lint`
-- [ ] 4.3 Build passes: `npm run build`
+- [x] 4.1 `grep -rn "bg-cosmic" src/` returns nothing
+- [x] 4.2 Linting passes: `npm run lint`
+- [x] 4.3 Build passes: `npm run build`
 
 #### Manual
 
-- [ ] 4.4 End-to-end flow smoke test passes (register → confirm-email → signin → donations → add/edit → profile → signout)
+- [x] 4.4 End-to-end flow smoke test passes (register → confirm-email → signin → donations → add/edit → profile → signout)

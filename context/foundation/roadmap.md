@@ -27,23 +27,23 @@ Dawcy krwi nie potrafią niezawodnie stwierdzić, kiedy mogą oddać krew nastę
 
 ## At a glance
 
-| ID    | Change ID                   | Outcome (user can …)                                          | Prerequisites | PRD refs                      | Status   |
-| ----- | --------------------------- | ------------------------------------------------------------- | ------------- | ----------------------------- | -------- |
-| F-01  | database-schema-migrations  | (foundation) schemat profiles + donations z RLS wgrany        | —             | Access Control, NFR prywatność | ready    |
-| S-01  | donor-profile-setup         | uzupełnić profil (płeć, grupa krwi, Rh)                       | F-01          | FR-001, FR-002, FR-003        | proposed |
-| S-02  | eligibility-calculator-view | dodać donację i zobaczyć daty kwalifikowalności per typ       | F-01, S-01    | FR-004, FR-008, FR-009, US-01 | proposed |
-| S-03  | donation-history-management | przeglądać listę donacji, edytować i usuwać wpisy             | S-02          | FR-005, FR-006, FR-007        | proposed |
-| S-04  | calendar-ics-export         | wyeksportować wybraną datę do kalendarza (.ics)               | S-02          | FR-010                        | proposed |
-| S-05  | pwa-installable-offline     | zainstalować aplikację na telefonie i używać offline          | —             | FR-011                        | ready    |
+| ID   | Change ID                   | Outcome (user can …)                                    | Prerequisites | PRD refs                       | Status   |
+| ---- | --------------------------- | ------------------------------------------------------- | ------------- | ------------------------------ | -------- |
+| F-01 | database-schema-migrations  | (foundation) schemat profiles + donations z RLS wgrany  | —             | Access Control, NFR prywatność | ready    |
+| S-01 | donor-profile-setup         | uzupełnić profil (płeć, grupa krwi, Rh)                 | F-01          | FR-001, FR-002, FR-003         | proposed |
+| S-02 | eligibility-calculator-view | dodać donację i zobaczyć daty kwalifikowalności per typ | F-01, S-01    | FR-004, FR-008, FR-009, US-01  | proposed |
+| S-03 | donation-history-management | przeglądać listę donacji, edytować i usuwać wpisy       | S-02          | FR-005, FR-006, FR-007         | proposed |
+| S-04 | calendar-ics-export         | wyeksportować wybraną datę do kalendarza (.ics)         | S-02          | FR-010                         | proposed |
+| S-05 | pwa-installable-offline     | zainstalować aplikację na telefonie i używać offline    | —             | FR-011                         | ready    |
 
 ## Streams
 
 Navigation aid — groups items that share a Prerequisites chain. Canonical ordering still lives in the dependency graph below; this table is the proposed reading order across parallel tracks.
 
-| Stream | Theme                | Chain                                         | Note                                                                                            |
-| ------ | -------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| A      | Profil i kalkulator  | `F-01` → `S-01` → `S-02` → `S-03` / `S-04`   | Główna ścieżka potwierdzenia rynkowego — sprawdzamy czy kalkulator rozwiązuje problem dawcy; S-03 i S-04 są równoległe po S-02. |
-| B      | PWA i instalowalność | `S-05`                                        | Samodzielny — brak zależności danych; może biec równolegle z F-01 i S-01 ze Stream A.          |
+| Stream | Theme                | Chain                                      | Note                                                                                                                            |
+| ------ | -------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| A      | Profil i kalkulator  | `F-01` → `S-01` → `S-02` → `S-03` / `S-04` | Główna ścieżka potwierdzenia rynkowego — sprawdzamy czy kalkulator rozwiązuje problem dawcy; S-03 i S-04 są równoległe po S-02. |
+| B      | PWA i instalowalność | `S-05`                                     | Samodzielny — brak zależności danych; może biec równolegle z F-01 i S-01 ze Stream A.                                           |
 
 ## Baseline
 
@@ -53,7 +53,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Frontend:** present — Astro 6.3.1 + React 19.2.6, Radix UI / shadcn-style primitives, Tailwind v4, routing plikowy (`src/pages/`)
 - **Backend / API:** present — Astro SSR + adapter Cloudflare, API routes dla auth (signin/signup/signout w `src/pages/api/auth/`), middleware (`src/middleware.ts`)
 - **Data:** partial — `@supabase/supabase-js` skonfigurowany, `supabase/config.toml` obecny; brak migracji schematu (tabele `profiles` i `donations` nie istnieją)
-- **Auth:** present — Supabase auth zintegrowany (`signUp`, `signInWithPassword`), middleware chroni `/dashboard`; FR-001 i FR-002 już zaimplementowane
+- **Auth:** present — Supabase auth zintegrowany (`signUp`, `signInWithPassword`), middleware chroni `/profile` i `/donations` (`/dashboard` to redirect na `/donations`); FR-001 i FR-002 już zaimplementowane
 - **Deploy / infra:** present — Cloudflare Workers (`wrangler.jsonc`), GitHub Actions CI/CD (`.github/workflows/ci.yml`)
 - **Observability:** absent — brak loggingu, error trackingu ani metryk; żaden NFR nie wymaga tego jako blokera release
 
@@ -138,14 +138,14 @@ Foundations below assume these are present and do NOT re-scaffold them.
 
 ## Backlog Handoff
 
-| Roadmap ID | Change ID                   | Suggested issue title                                         | Ready for `/10x-plan` | Notes                                        |
-| ---------- | --------------------------- | ------------------------------------------------------------- | --------------------- | -------------------------------------------- |
-| F-01       | database-schema-migrations  | Define & migrate Supabase schema: profiles + donations + RLS  | yes                   | Uruchom `/10x-plan database-schema-migrations` |
-| S-01       | donor-profile-setup         | Build donor profile page (sex, blood group, Rh)              | no                    | Czeka na F-01                                |
-| S-02       | eligibility-calculator-view | Add donation flow + eligibility calculator view              | no                    | Czeka na S-01; to gwiazda przewodnia         |
-| S-03       | donation-history-management | Donation history list with edit and delete                   | no                    | Czeka na S-02; równoległy z S-04             |
-| S-04       | calendar-ics-export         | Export eligible date as .ics calendar file                   | no                    | Czeka na S-02; równoległy z S-03             |
-| S-05       | pwa-installable-offline     | Add PWA service worker + web manifest for offline install    | yes                   | Uruchom `/10x-plan pwa-installable-offline`  |
+| Roadmap ID | Change ID                   | Suggested issue title                                        | Ready for `/10x-plan` | Notes                                          |
+| ---------- | --------------------------- | ------------------------------------------------------------ | --------------------- | ---------------------------------------------- |
+| F-01       | database-schema-migrations  | Define & migrate Supabase schema: profiles + donations + RLS | yes                   | Uruchom `/10x-plan database-schema-migrations` |
+| S-01       | donor-profile-setup         | Build donor profile page (sex, blood group, Rh)              | no                    | Czeka na F-01                                  |
+| S-02       | eligibility-calculator-view | Add donation flow + eligibility calculator view              | no                    | Czeka na S-01; to gwiazda przewodnia           |
+| S-03       | donation-history-management | Donation history list with edit and delete                   | no                    | Czeka na S-02; równoległy z S-04               |
+| S-04       | calendar-ics-export         | Export eligible date as .ics calendar file                   | no                    | Czeka na S-02; równoległy z S-03               |
+| S-05       | pwa-installable-offline     | Add PWA service worker + web manifest for offline install    | yes                   | Uruchom `/10x-plan pwa-installable-offline`    |
 
 ## Open Roadmap Questions
 
