@@ -3,35 +3,45 @@ const { user } = Astro.locals;
 ---
 
 <div
-  class="mb-4 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80"
+  class="mb-4 flex items-center justify-between rounded-xl px-4 py-2.5 text-sm"
+  style="border: 1px solid rgba(220,38,38,0.2); background: rgba(220,38,38,0.05); backdrop-filter: blur(8px);"
 >
+  <!-- Brand -->
+  <a href="/" class="flex items-center gap-2 font-semibold text-white transition-opacity hover:opacity-80">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#ef4444">
+      <path
+        d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"
+      ></path>
+    </svg>
+    Vena
+  </a>
+
   {
     user ? (
-      <>
-        <span class="text-blue-100/70">{user.email}</span>
-        <div class="flex items-center gap-3">
-          <a href="/dashboard" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
-            Dashboard
-          </a>
-          <form method="POST" action="/api/auth/signout">
-            <button type="submit" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
-              Sign out
-            </button>
-          </form>
-        </div>
-      </>
+      <div class="flex items-center gap-4">
+        <span style="color: rgba(254,202,202,0.55); font-size: 0.75rem;">{user.email}</span>
+        <a href="/dashboard" style="color: #fca5a5;" class="transition-colors hover:text-white">
+          Panel główny
+        </a>
+        <form method="POST" action="/api/auth/signout">
+          <button type="submit" style="color: #fca5a5;" class="transition-colors hover:text-white">
+            Wyloguj się
+          </button>
+        </form>
+      </div>
     ) : (
-      <>
-        <span class="text-blue-100/70">Not signed in</span>
-        <div class="flex gap-3">
-          <a href="/auth/signin" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
-            Sign in
-          </a>
-          <a href="/auth/signup" class="text-purple-300 transition-colors hover:text-purple-100 hover:underline">
-            Sign up
-          </a>
-        </div>
-      </>
+      <div class="flex gap-3">
+        <a href="/auth/signin" style="color: #fca5a5;" class="transition-colors hover:text-white">
+          Zaloguj się
+        </a>
+        <a
+          href="/auth/signup"
+          class="rounded-lg px-3 py-1 text-xs font-medium text-white transition-all hover:brightness-110"
+          style="background: rgba(220,38,38,0.7);"
+        >
+          Zarejestruj się
+        </a>
+      </div>
     )
   }
 </div>
