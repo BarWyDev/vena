@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 
 export default function OfflineBanner() {
-  const [isOnline, setIsOnline] = useState(() => (typeof navigator !== "undefined" ? navigator.onLine : true));
+  const [isOnline, setIsOnline] = useState(true);
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
+    const verify = async () => {
+      try {
+        await fetch("/favicon.svg", { method: "HEAD", cache: "no-store" });
+        setIsOnline(true);
+      } catch {
+        setIsOnline(false);
+      }
+    };
+
     const handleOnline = () => {
       setIsOnline(true);
       setDismissed(false);
@@ -13,6 +22,7 @@ export default function OfflineBanner() {
       setIsOnline(false);
     };
 
+    void verify();
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
     return () => {
