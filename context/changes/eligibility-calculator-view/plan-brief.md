@@ -16,19 +16,19 @@ A logged-in donor with a complete profile visits `/donations`, adds a donation r
 
 ## Key Decisions Made
 
-| Decision | Choice | Why (1 sentence) | Source |
-| --- | --- | --- | --- |
-| Page location | New `/donations` route | S-03 will extend it into the full history view; dashboard stays a nav hub | Plan |
-| Post-submit UX | Redirect + server-rendered results | Consistent with `api/profile.ts` pattern; no client-side fetch needed | Plan |
-| Calculator display | Three clickable glass cards | Scannable per-type; natural click-to-select for FR-009 | Plan |
-| Type selection (FR-009) | Card click → `?type=` URL param | Zero extra UI; S-04 reads the param without re-touching the component | Plan |
-| Unit testing | Vitest added in Phase 1 | Release-blocking correctness criterion requires automated proof | Plan |
-| Test coverage | All 6 sex×type combos + 2 edge cases | Covers the sex-specific whole-blood rule — the most common correctness bug | Plan |
-| Empty state | Explanatory text above always-visible form | Donor can act immediately; PRD US-01 AC requires explanatory empty state | Plan |
-| History on this page | None — defer to S-03 | Sharp S-02 scope; calculator result implies the last donation | Plan |
-| Date validation | Server rejects future dates | Prevents calculator from producing a "past eligible" date — a silent correctness bug | Plan |
-| Polish labels | whole_blood→"Krew pełna", plasma→"Osocze", platelets→"Płytki krwi" | Standard RCKiK vocabulary | Plan |
-| S-04 integration | `?type=` URL param via `history.replaceState` | S-04 adds an export button that reads the URL; no S-02 component rework needed | Plan |
+| Decision                | Choice                                                             | Why (1 sentence)                                                                     | Source |
+| ----------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------ |
+| Page location           | New `/donations` route                                             | S-03 will extend it into the full history view; dashboard stays a nav hub            | Plan   |
+| Post-submit UX          | Redirect + server-rendered results                                 | Consistent with `api/profile.ts` pattern; no client-side fetch needed                | Plan   |
+| Calculator display      | Three clickable glass cards                                        | Scannable per-type; natural click-to-select for FR-009                               | Plan   |
+| Type selection (FR-009) | Card click → `?type=` URL param                                    | Zero extra UI; S-04 reads the param without re-touching the component                | Plan   |
+| Unit testing            | Vitest added in Phase 1                                            | Release-blocking correctness criterion requires automated proof                      | Plan   |
+| Test coverage           | All 6 sex×type combos + 2 edge cases                               | Covers the sex-specific whole-blood rule — the most common correctness bug           | Plan   |
+| Empty state             | Explanatory text above always-visible form                         | Donor can act immediately; PRD US-01 AC requires explanatory empty state             | Plan   |
+| History on this page    | None — defer to S-03                                               | Sharp S-02 scope; calculator result implies the last donation                        | Plan   |
+| Date validation         | Server rejects future dates                                        | Prevents calculator from producing a "past eligible" date — a silent correctness bug | Plan   |
+| Polish labels           | whole_blood→"Krew pełna", plasma→"Osocze", platelets→"Płytki krwi" | Standard RCKiK vocabulary                                                            | Plan   |
+| S-04 integration        | `?type=` URL param via `history.replaceState`                      | S-04 adds an export button that reads the URL; no S-02 component rework needed       | Plan   |
 
 ## Scope
 
@@ -42,11 +42,11 @@ The `/donations` Astro page server-fetches profile (`sex`) and all donations in 
 
 ## Phases at a Glance
 
-| Phase | What it delivers | Key risk |
-| --- | --- | --- |
-| 1. Calculator engine + Vitest | Pure `calculateEligibility` + 8 unit tests prove all RCKiK rules | UTC date arithmetic bug silently shifts dates by ±1 day — addressed in Critical Details |
-| 2. Donation data layer + API | `donations.ts`, POST route with server-side validation, middleware update | Future `donated_at` produces a stale eligibility date — rejected server-side |
-| 3. /donations page + UI + dashboard link | Full end-to-end flow: form → redirect → cards; dashboard entry point | Three-card layout needs enough horizontal space — `max-w-2xl` container |
+| Phase                                    | What it delivers                                                          | Key risk                                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| 1. Calculator engine + Vitest            | Pure `calculateEligibility` + 8 unit tests prove all RCKiK rules          | UTC date arithmetic bug silently shifts dates by ±1 day — addressed in Critical Details |
+| 2. Donation data layer + API             | `donations.ts`, POST route with server-side validation, middleware update | Future `donated_at` produces a stale eligibility date — rejected server-side            |
+| 3. /donations page + UI + dashboard link | Full end-to-end flow: form → redirect → cards; dashboard entry point      | Three-card layout needs enough horizontal space — `max-w-2xl` container                 |
 
 **Prerequisites:** F-01 (schema) ✓ and S-01 (profile + gating) ✓ — both fully shipped.
 **Estimated effort:** ~2-3 sessions across 3 phases.

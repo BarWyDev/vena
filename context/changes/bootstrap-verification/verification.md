@@ -42,10 +42,10 @@ Vena is a solo, after-hours blood-donation eligibility PWA targeting a 3-week MV
 
 ## Pre-scaffold verification
 
-| Signal       | Value                                                       | Severity | Notes                                            |
-| ------------ | ----------------------------------------------------------- | -------- | ------------------------------------------------ |
-| npm package  | not run                                                     | n/a      | cmd_template starts with `git clone`; no npm CLI |
-| GitHub repo  | przeprogramowani/10x-astro-starter last pushed 2026-05-17   | fresh    | from card.docs_url; within last 3 months         |
+| Signal      | Value                                                     | Severity | Notes                                            |
+| ----------- | --------------------------------------------------------- | -------- | ------------------------------------------------ |
+| npm package | not run                                                   | n/a      | cmd_template starts with `git clone`; no npm CLI |
+| GitHub repo | przeprogramowani/10x-astro-starter last pushed 2026-05-17 | fresh    | from card.docs_url; within last 3 months         |
 
 Note: `gh` CLI not installed; recency obtained via GitHub REST API (`api.github.com/repos/...`) as a read-only fallback.
 
@@ -95,27 +95,28 @@ None.
 
 ## Hints recorded but not acted on
 
-| Hint                    | Value             |
-| ----------------------- | ----------------- |
-| bootstrapper_confidence | first-class       |
-| quality_override        | false             |
-| path_taken              | standard          |
-| self_check_answers      | null              |
-| team_size               | solo              |
-| deployment_target       | cloudflare-pages  |
-| ci_provider             | github-actions    |
+| Hint                    | Value                |
+| ----------------------- | -------------------- |
+| bootstrapper_confidence | first-class          |
+| quality_override        | false                |
+| path_taken              | standard             |
+| self_check_answers      | null                 |
+| team_size               | solo                 |
+| deployment_target       | cloudflare-pages     |
+| ci_provider             | github-actions       |
 | ci_default_flow         | auto-deploy-on-merge |
-| has_auth                | true              |
-| has_payments            | false             |
-| has_realtime            | false             |
-| has_ai                  | false             |
-| has_background_jobs     | false             |
+| has_auth                | true                 |
+| has_payments            | false                |
+| has_realtime            | false                |
+| has_ai                  | false                |
+| has_background_jobs     | false                |
 
 ## Next steps
 
 Next: a future skill will set up agent context (CLAUDE.md, AGENTS.md). For now, your project is scaffolded and verified — happy hacking.
 
 Useful manual steps in the meantime:
+
 - `git init` (if you have not already) to start your own repo history.
 - Review the `CLAUDE.md.scaffold` sibling the conflict policy created and decide whether to merge the starter's guidance into your existing `CLAUDE.md`.
 - Address audit findings per your project's risk tolerance — all 10 are transitive-rooted (`devalue`, `ws`, `yaml`); none are direct CRITICAL/HIGH. `npm audit fix` may clear several once upstream bumps land.
