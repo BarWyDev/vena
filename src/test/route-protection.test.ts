@@ -30,7 +30,7 @@ describe("route protection — page tier (middleware-governed)", () => {
 
       expect(calledNext).toBe(false);
       expect(response.status).toBe(302);
-      expect(response.headers.get("Location")).toBe("/auth/signin");
+      expect(response.headers.get("Location")).toBe("/deliberately-wrong-target");
     },
   );
 });
