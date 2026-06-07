@@ -1,7 +1,7 @@
 ---
 change_id: testing-auth-shared-ui-safety-net
 title: Auth & shared-UI regression safety net (test-plan Phase 1)
-status: implementing
+status: implemented
 created: 2026-06-07
 updated: 2026-06-07
 archived_at: null

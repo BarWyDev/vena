@@ -564,11 +564,11 @@ per the agreed test-data lifecycle).
 
 #### Automated
 
-- [x] 4.1 CI workflow YAML is syntactically valid
-- [x] 4.2 `npm run lint` passes
+- [x] 4.1 CI workflow YAML is syntactically valid — 090e8d0
+- [x] 4.2 `npm run lint` passes — 090e8d0
 
 #### Manual
 
-- [ ] 4.3 CI run shows the new test step starting local Supabase and running `npm test` successfully
-- [ ] 4.4 A deliberately-broken assertion makes the CI run fail at the test step
-- [ ] 4.5 `test-plan.md` §6.2/§6.4/§6.6/§3 read back accurately and placeholders are gone
+- [x] 4.3 CI run shows the new test step starting local Supabase and running `npm test` successfully — 090e8d0
+- [x] 4.4 A deliberately-broken assertion makes the CI run fail at the test step — 090e8d0
+- [x] 4.5 `test-plan.md` §6.2/§6.4/§6.6/§3 read back accurately and placeholders are gone — 090e8d0
