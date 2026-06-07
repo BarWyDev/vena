@@ -540,25 +540,25 @@ per the agreed test-data lifecycle).
 
 #### Automated
 
-- [x] 2.1 `npx vitest run src/test/route-protection.test.ts` passes
-- [x] 2.2 `npm run lint` passes
+- [x] 2.1 `npx vitest run src/test/route-protection.test.ts` passes — 7dc89cd
+- [x] 2.2 `npm run lint` passes — 7dc89cd
 
 #### Manual
 
-- [x] 2.3 Re-derive the route inventory from `find src/pages -type f` and confirm every data-bearing route is covered by the test's parameterized list
+- [x] 2.3 Re-derive the route inventory from `find src/pages -type f` and confirm every data-bearing route is covered by the test's parameterized list — 7dc89cd
 
 ### Phase 3: Risk #2 — auth-flow integration tests
 
 #### Automated
 
-- [ ] 3.1 `npx vitest run src/test/auth-flow.test.ts` passes
-- [ ] 3.2 `npm run lint` passes
-- [ ] 3.3 Full suite passes: `npm test`
+- [x] 3.1 `npx vitest run src/test/auth-flow.test.ts` passes
+- [x] 3.2 `npm run lint` passes
+- [x] 3.3 Full suite passes: `npm test`
 
 #### Manual
 
-- [ ] 3.4 Run the suite twice consecutively and confirm both runs pass (no cross-run interference from unique-email accounts)
-- [ ] 3.5 Inspect Supabase Studio and confirm seeded `profiles` rows show `sex = 'male'`
+- [x] 3.4 Run the suite twice consecutively and confirm both runs pass (no cross-run interference from unique-email accounts)
+- [x] 3.5 Inspect Supabase Studio and confirm seeded `profiles` rows show `sex = 'male'`
 
 ### Phase 4: CI wiring + cookbook close-out
 
