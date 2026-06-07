@@ -3,7 +3,7 @@ const { user } = Astro.locals;
 ---
 
 <div
-  class="mb-4 flex items-center justify-between rounded-xl px-4 py-2.5 text-sm"
+  class="mb-4 flex flex-col gap-3 rounded-xl px-4 py-2.5 text-sm sm:flex-row sm:items-center sm:justify-between"
   style="border: 1px solid rgba(220,38,38,0.2); background: rgba(220,38,38,0.05); backdrop-filter: blur(8px);"
 >
   <!-- Brand -->
@@ -18,16 +18,18 @@ const { user } = Astro.locals;
 
   {
     user ? (
-      <div class="flex items-center gap-4">
-        <span style="color: rgba(254,202,202,0.55); font-size: 0.75rem;">{user.email}</span>
-        <a href="/donations" style="color: #fca5a5;" class="transition-colors hover:text-white">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <span class="max-w-[60vw] truncate sm:max-w-none" style="color: rgba(254,202,202,0.55); font-size: 0.75rem;">
+          {user.email}
+        </span>
+        <a href="/donations" style="color: #fca5a5;" class="whitespace-nowrap transition-colors hover:text-white">
           Donacje
         </a>
-        <a href="/profile" style="color: #fca5a5;" class="transition-colors hover:text-white">
+        <a href="/profile" style="color: #fca5a5;" class="whitespace-nowrap transition-colors hover:text-white">
           Profil
         </a>
         <form method="POST" action="/api/auth/signout">
-          <button type="submit" style="color: #fca5a5;" class="transition-colors hover:text-white">
+          <button type="submit" style="color: #fca5a5;" class="whitespace-nowrap transition-colors hover:text-white">
             Wyloguj się
           </button>
         </form>
