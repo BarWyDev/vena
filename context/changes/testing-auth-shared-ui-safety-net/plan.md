@@ -551,21 +551,21 @@ per the agreed test-data lifecycle).
 
 #### Automated
 
-- [x] 3.1 `npx vitest run src/test/auth-flow.test.ts` passes
-- [x] 3.2 `npm run lint` passes
-- [x] 3.3 Full suite passes: `npm test`
+- [x] 3.1 `npx vitest run src/test/auth-flow.test.ts` passes — 01ec148
+- [x] 3.2 `npm run lint` passes — 01ec148
+- [x] 3.3 Full suite passes: `npm test` — 01ec148
 
 #### Manual
 
-- [x] 3.4 Run the suite twice consecutively and confirm both runs pass (no cross-run interference from unique-email accounts)
-- [x] 3.5 Inspect Supabase Studio and confirm seeded `profiles` rows show `sex = 'male'`
+- [x] 3.4 Run the suite twice consecutively and confirm both runs pass (no cross-run interference from unique-email accounts) — 01ec148
+- [x] 3.5 Inspect Supabase Studio and confirm seeded `profiles` rows show `sex = 'male'` — 01ec148
 
 ### Phase 4: CI wiring + cookbook close-out
 
 #### Automated
 
-- [ ] 4.1 CI workflow YAML is syntactically valid
-- [ ] 4.2 `npm run lint` passes
+- [x] 4.1 CI workflow YAML is syntactically valid
+- [x] 4.2 `npm run lint` passes
 
 #### Manual
 

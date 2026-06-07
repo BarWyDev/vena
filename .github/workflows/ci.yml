@@ -18,6 +18,16 @@ jobs:
       - run: npm ci
       - run: npx astro sync
       - run: npm run lint
+      - run: npx supabase start
+      - name: Resolve local Supabase URL/key for the test suite
+        # The test suite targets the disposable local stack, never the
+        # production secrets.SUPABASE_URL/SUPABASE_KEY used by build/deploy —
+        # `supabase start` prints those local, deterministic values here.
+        run: |
+          npx supabase status -o env --override-name api.url=SUPABASE_URL --override-name auth.anon_key=SUPABASE_KEY \
+            | grep -E '^(SUPABASE_URL|SUPABASE_KEY)=' \
+            | sed 's/"//g' >> "$GITHUB_ENV"
+      - run: npm test
       - run: npm run build
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
