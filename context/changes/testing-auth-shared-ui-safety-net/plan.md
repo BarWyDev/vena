@@ -529,23 +529,23 @@ per the agreed test-data lifecycle).
 
 #### Automated
 
-- [x] 1.1 Lint passes: `npm run lint`
-- [x] 1.2 `npx vitest run` completes without module-resolution errors; existing `eligibility.test.ts` suite still passes
+- [x] 1.1 Lint passes: `npm run lint` — aeed469
+- [x] 1.2 `npx vitest run` completes without module-resolution errors; existing `eligibility.test.ts` suite still passes — aeed469
 
 #### Manual
 
-- [x] 1.3 Confirm `createClient()` returns a real client (not `null`) inside a Vitest run
+- [x] 1.3 Confirm `createClient()` returns a real client (not `null`) inside a Vitest run — aeed469
 
 ### Phase 2: Risk #5 — route-protection contract test
 
 #### Automated
 
-- [ ] 2.1 `npx vitest run src/test/route-protection.test.ts` passes
-- [ ] 2.2 `npm run lint` passes
+- [x] 2.1 `npx vitest run src/test/route-protection.test.ts` passes
+- [x] 2.2 `npm run lint` passes
 
 #### Manual
 
-- [ ] 2.3 Re-derive the route inventory from `find src/pages -type f` and confirm every data-bearing route is covered by the test's parameterized list
+- [x] 2.3 Re-derive the route inventory from `find src/pages -type f` and confirm every data-bearing route is covered by the test's parameterized list
 
 ### Phase 3: Risk #2 — auth-flow integration tests
 
