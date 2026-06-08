@@ -408,13 +408,13 @@ Rollback = drop the column (and constraint); no data dependency elsewhere.
 
 #### Automated
 
-- [x] 4.1 Lint passes (`npm run lint`)
-- [x] 4.2 Build passes (`npm run build`)
-- [x] 4.3 Unit tests still pass (`npm run test`)
+- [x] 4.1 Lint passes (`npm run lint`) — f3da05d
+- [x] 4.2 Build passes (`npm run build`) — f3da05d
+- [x] 4.3 Unit tests still pass (`npm run test`) — f3da05d
 
 #### Manual
 
-- [x] 4.4 Summary card shows correct liters + per-type ml when donations exist
-- [x] 4.5 No summary card renders with zero donations
-- [x] 4.6 History rows show each volume; totals reconcile
-- [x] 4.7 PRD reads coherently with FR-012 and no contradictory Non-Goal
+- [x] 4.4 Summary card shows correct liters + per-type ml when donations exist — f3da05d
+- [x] 4.5 No summary card renders with zero donations — f3da05d
+- [x] 4.6 History rows show each volume; totals reconcile — f3da05d
+- [x] 4.7 PRD reads coherently with FR-012 and no contradictory Non-Goal — f3da05d
