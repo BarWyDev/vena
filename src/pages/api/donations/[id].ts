@@ -34,7 +34,13 @@ export const POST: APIRoute = async (context) => {
     return context.redirect(`/donations?error=${encodeURIComponent("Nieprawidłowa data donacji")}`);
   }
 
-  const { error } = await updateDonation(supabase, user.id, id, type, donatedAt);
+  const volumeRaw = form.get("volume_ml");
+  const volumeMl = typeof volumeRaw === "string" ? Number(volumeRaw) : NaN;
+  if (!Number.isInteger(volumeMl) || volumeMl <= 0 || volumeMl > 2000) {
+    return context.redirect(`/donations?error=${encodeURIComponent("Nieprawidłowa ilość krwi")}`);
+  }
+
+  const { error } = await updateDonation(supabase, user.id, id, type, donatedAt, volumeMl);
 
   if (error) {
     return context.redirect(`/donations?error=${encodeURIComponent("Nie udało się zaktualizować donacji")}`);

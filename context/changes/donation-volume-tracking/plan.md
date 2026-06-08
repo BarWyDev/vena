@@ -383,26 +383,26 @@ Rollback = drop the column (and constraint); no data dependency elsewhere.
 
 #### Automated
 
-- [x] 2.1 Unit tests pass (`npm run test`)
-- [x] 2.2 Type checking / lint passes (`npm run lint`)
+- [x] 2.1 Unit tests pass (`npm run test`) — 099885c
+- [x] 2.2 Type checking / lint passes (`npm run lint`) — 099885c
 
 #### Manual
 
-- [x] 2.3 formatLiters output reads naturally in Polish
+- [x] 2.3 formatLiters output reads naturally in Polish — 099885c
 
 ### Phase 3: API + Forms
 
 #### Automated
 
-- [ ] 3.1 Lint passes incl. react-compiler (`npm run lint`)
-- [ ] 3.2 Build passes (`npm run build`)
+- [x] 3.1 Lint passes incl. react-compiler (`npm run lint`)
+- [x] 3.2 Build passes (`npm run build`)
 
 #### Manual
 
-- [ ] 3.3 Adding a donation with custom volume persists it
-- [ ] 3.4 Changing type in add form updates default volume
-- [ ] 3.5 Invalid volume (0 / blank / >2000) redirects with Polish error
-- [ ] 3.6 Editing a donation's volume saves the new value
+- [x] 3.3 Adding a donation with custom volume persists it
+- [x] 3.4 Changing type in add form updates default volume
+- [x] 3.5 Invalid volume (0 / blank / >2000) redirects with Polish error
+- [x] 3.6 Editing a donation's volume saves the new value
 
 ### Phase 4: Presentation + PRD
 
