@@ -41,6 +41,7 @@ export type Database = {
           id: string;
           type: Database["public"]["Enums"]["donation_type"];
           user_id: string;
+          volume_ml: number;
         };
         Insert: {
           created_at?: string;
@@ -48,6 +49,7 @@ export type Database = {
           id?: string;
           type: Database["public"]["Enums"]["donation_type"];
           user_id: string;
+          volume_ml: number;
         };
         Update: {
           created_at?: string;
@@ -55,6 +57,7 @@ export type Database = {
           id?: string;
           type?: Database["public"]["Enums"]["donation_type"];
           user_id?: string;
+          volume_ml?: number;
         };
         Relationships: [];
       };
