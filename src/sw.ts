@@ -5,6 +5,12 @@ import { ExpirationPlugin } from "workbox-expiration";
 
 declare let self: ServiceWorkerGlobalScope;
 
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
 precacheAndRoute(self.__WB_MANIFEST);
 
 registerRoute(({ url }) => url.pathname.startsWith("/api/"), new NetworkOnly());
