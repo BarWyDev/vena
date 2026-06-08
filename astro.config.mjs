@@ -25,7 +25,7 @@ export default defineConfig({
         short_name: "Vena",
         description: "Kalkulator dat kwalifikowalności do oddawania krwi",
         theme_color: "#dc2626",
-        background_color: "#ffffff",
+        background_color: "#0d0a0a",
         display: "standalone",
         lang: "pl",
         start_url: "/",
