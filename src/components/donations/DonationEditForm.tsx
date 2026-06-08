@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Droplet, Save } from "lucide-react";
 import { SelectField } from "@/components/profile/SelectField";
+import { DateField } from "@/components/donations/DateField";
 import { SubmitButton } from "@/components/auth/SubmitButton";
 import { ServerError } from "@/components/auth/ServerError";
 import { DONATION_TYPES, DONATION_TYPE_LABELS } from "@/lib/donations";
@@ -17,6 +18,7 @@ interface Props {
 export default function DonationEditForm({ donation, serverError }: Props) {
   const [type, setType] = useState<DonationType>(donation.type);
   const [volume, setVolume] = useState(String(donation.volume_ml));
+  const [donatedAt, setDonatedAt] = useState(donation.donated_at);
   const today = new Date().toISOString().split("T")[0];
 
   return (
@@ -34,20 +36,7 @@ export default function DonationEditForm({ donation, serverError }: Props) {
         icon={<Droplet className="size-4" />}
       />
 
-      <div>
-        <label htmlFor="donated_at" className="mb-1 block text-sm" style={{ color: "rgba(254,202,202,0.7)" }}>
-          Data donacji
-        </label>
-        <input
-          type="date"
-          id="donated_at"
-          name="donated_at"
-          required
-          max={today}
-          defaultValue={donation.donated_at}
-          className="w-full appearance-none rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white transition-colors focus:ring-2 focus:ring-red-700 focus:outline-none"
-        />
-      </div>
+      <DateField id="donated_at" label="Data donacji" value={donatedAt} onChange={setDonatedAt} required max={today} />
 
       <div>
         <label htmlFor="volume_ml" className="mb-1 block text-sm" style={{ color: "rgba(254,202,202,0.7)" }}>
