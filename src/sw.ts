@@ -3,7 +3,10 @@ import { registerRoute, NavigationRoute } from "workbox-routing";
 import { CacheFirst, NetworkFirst, NetworkOnly } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 
-declare let self: ServiceWorkerGlobalScope;
+declare let self: ServiceWorkerGlobalScope & {
+  addEventListener(type: "message", listener: (event: { data?: { type?: string } }) => void): void;
+  skipWaiting(): void;
+};
 
 self.addEventListener("message", (event) => {
   if (event.data?.type === "SKIP_WAITING") {
