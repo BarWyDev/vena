@@ -368,27 +368,27 @@ Rollback = drop the column (and constraint); no data dependency elsewhere.
 
 #### Automated
 
-- [x] 1.1 Migration applies cleanly on a fresh local DB (`npx supabase db reset`)
-- [x] 1.2 Types regenerate without drift beyond the new column (`npm run gen-types`)
-- [x] 1.3 Type checking / lint passes (`npm run lint`)
-- [x] 1.4 Build passes (`npm run build`)
+- [x] 1.1 Migration applies cleanly on a fresh local DB (`npx supabase db reset`) — 1fb5bb5
+- [x] 1.2 Types regenerate without drift beyond the new column (`npm run gen-types`) — 1fb5bb5
+- [x] 1.3 Type checking / lint passes (`npm run lint`) — 1fb5bb5
+- [x] 1.4 Build passes (`npm run build`) — 1fb5bb5
 
 #### Manual
 
-- [x] 1.5 Existing rows show per-type backfilled volume after reset
-- [x] 1.6 Insert without volume_ml rejected by NOT NULL
-- [x] 1.7 volume_ml = 0 or > 2000 rejected by CHECK
+- [x] 1.5 Existing rows show per-type backfilled volume after reset — 1fb5bb5
+- [x] 1.6 Insert without volume_ml rejected by NOT NULL — 1fb5bb5
+- [x] 1.7 volume_ml = 0 or > 2000 rejected by CHECK — 1fb5bb5
 
 ### Phase 2: Domain Layer + Tests
 
 #### Automated
 
-- [ ] 2.1 Unit tests pass (`npm run test`)
-- [ ] 2.2 Type checking / lint passes (`npm run lint`)
+- [x] 2.1 Unit tests pass (`npm run test`)
+- [x] 2.2 Type checking / lint passes (`npm run lint`)
 
 #### Manual
 
-- [ ] 2.3 formatLiters output reads naturally in Polish
+- [x] 2.3 formatLiters output reads naturally in Polish
 
 ### Phase 3: API + Forms
 
