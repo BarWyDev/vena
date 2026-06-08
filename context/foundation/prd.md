@@ -80,6 +80,8 @@ Primary persona: an individual blood donor managing their own donation cadence (
   > Socratic: Counter considered: "delete + re-add could replace edit." Resolution: kept; mistyped dates are the common correction path and deserve a direct edit flow.
 - FR-007: Donor can delete a donation record. Priority: must-have
   > Socratic: Counter considered: "deleting the latest donation silently recomputes an earlier eligible date — confusing." Resolution: kept; the recompute is correct behavior. (Watch: a confirm/guard on delete is worth considering downstream.)
+- FR-012: Donor can record the volume (ml) of each donation and see their total donated volume (litres headline + per-type ml breakdown). Priority: should-have
+  > Socratic: Counter considered: the original Non-Goal "no liters donated" — banned as gamification. Resolution: reversed for a passive cumulative readout; donors asked to track "how much I've given," and a plain total is a natural extension of the per-donation record (FR-004), distinct from badges/streaks which remain out of scope. Volume is donor-entered per donation with a per-type default; the eligibility calculator (FR-008) does not consume it.
 
 ### Eligibility calculator
 
@@ -123,7 +125,7 @@ Email + password registration and login. Each donor owns an account; their profi
 ## Non-Goals
 
 - **No integration with e-Krew / official RCKiK systems.** Donors enter their history manually; avoids a heavy, uncertain external integration for v1.
-- **No donation statistics or gamification** (liters donated, badges, streaks) — keeps the product focused on the eligibility calculation.
+- **No gamification** (badges, streaks, goals) — keeps the product focused on the eligibility calculation. A plain cumulative total of donated volume (FR-012) is the one deliberate exception: it is a passive readout, not a game mechanic.
 - **No tracking of health parameters** (iron, hemoglobin, other lab values) — out of scope for an eligibility-date tool.
 - **No donation-center finder or map** — Vena answers "when", not "where".
 - **No educational content** ("how to donate", "what happens to blood").

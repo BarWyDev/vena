@@ -6,6 +6,7 @@ import EligibilityCards from "@/components/donations/EligibilityCards";
 import { createClient } from "@/lib/supabase";
 import { getProfile } from "@/lib/profile";
 import { getDonations, getLatestPerType, getLatestIds } from "@/lib/donations";
+import { sumVolume, sumVolumeByType, formatLiters, DONATION_TYPE_LABELS } from "@/lib/donations";
 import type { DonationRow } from "@/lib/donations";
 import DonationHistory from "@/components/donations/DonationHistory";
 import { calculateEligibility, DONATION_TYPES } from "@/lib/eligibility";
@@ -36,6 +37,8 @@ if (supabase && user) {
 
 const hasDonations = donations.length > 0;
 const latestIds = getLatestIds(donations);
+const totalVolume = sumVolume(donations);
+const volumeByType = sumVolumeByType(donations);
 ---
 
 <Layout title="Moje donacje">
@@ -71,6 +74,33 @@ const latestIds = getLatestIds(donations);
           <p class="mb-6 text-center text-sm" style="color: rgba(254,202,202,0.65);">
             Dodaj pierwszą donację, aby zobaczyć kiedy możesz oddać krew następnym razem.
           </p>
+        )
+      }
+
+      {
+        hasDonations && (
+          <div
+            class="mb-6 rounded-2xl p-5"
+            style="border: 1px solid rgba(220,38,38,0.15); background: rgba(255,255,255,0.03);"
+          >
+            <p class="text-sm" style="color: rgba(254,202,202,0.7);">
+              Łącznie oddano
+            </p>
+            <p
+              class="mt-1 text-3xl font-bold"
+              style="background: linear-gradient(135deg, #fecaca 0%, #f87171 40%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+            >
+              {formatLiters(totalVolume)}
+            </p>
+            <ul class="mt-3 space-y-1">
+              {DONATION_TYPES.filter((t) => volumeByType[t] > 0).map((t) => (
+                <li class="flex justify-between text-xs" style="color: rgba(254,202,202,0.6);">
+                  <span>{DONATION_TYPE_LABELS[t]}</span>
+                  <span>{volumeByType[t]} ml</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         )
       }
 

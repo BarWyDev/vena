@@ -29,7 +29,7 @@ export default function DonationHistory({ donations, latestIds }: Props) {
               <div>
                 <p className="text-sm font-medium text-white">{DONATION_TYPE_LABELS[row.type]}</p>
                 <p className="text-xs" style={{ color: "rgba(254,202,202,0.55)" }}>
-                  {formattedDate}
+                  {formattedDate} · {row.volume_ml} ml
                 </p>
               </div>
 

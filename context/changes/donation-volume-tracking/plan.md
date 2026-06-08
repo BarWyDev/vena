@@ -394,27 +394,27 @@ Rollback = drop the column (and constraint); no data dependency elsewhere.
 
 #### Automated
 
-- [x] 3.1 Lint passes incl. react-compiler (`npm run lint`)
-- [x] 3.2 Build passes (`npm run build`)
+- [x] 3.1 Lint passes incl. react-compiler (`npm run lint`) — 0628991
+- [x] 3.2 Build passes (`npm run build`) — 0628991
 
 #### Manual
 
-- [x] 3.3 Adding a donation with custom volume persists it
-- [x] 3.4 Changing type in add form updates default volume
-- [x] 3.5 Invalid volume (0 / blank / >2000) redirects with Polish error
-- [x] 3.6 Editing a donation's volume saves the new value
+- [x] 3.3 Adding a donation with custom volume persists it — 0628991
+- [x] 3.4 Changing type in add form updates default volume — 0628991
+- [x] 3.5 Invalid volume (0 / blank / >2000) redirects with Polish error — 0628991
+- [x] 3.6 Editing a donation's volume saves the new value — 0628991
 
 ### Phase 4: Presentation + PRD
 
 #### Automated
 
-- [ ] 4.1 Lint passes (`npm run lint`)
-- [ ] 4.2 Build passes (`npm run build`)
-- [ ] 4.3 Unit tests still pass (`npm run test`)
+- [x] 4.1 Lint passes (`npm run lint`)
+- [x] 4.2 Build passes (`npm run build`)
+- [x] 4.3 Unit tests still pass (`npm run test`)
 
 #### Manual
 
-- [ ] 4.4 Summary card shows correct liters + per-type ml when donations exist
-- [ ] 4.5 No summary card renders with zero donations
-- [ ] 4.6 History rows show each volume; totals reconcile
-- [ ] 4.7 PRD reads coherently with FR-012 and no contradictory Non-Goal
+- [x] 4.4 Summary card shows correct liters + per-type ml when donations exist
+- [x] 4.5 No summary card renders with zero donations
+- [x] 4.6 History rows show each volume; totals reconcile
+- [x] 4.7 PRD reads coherently with FR-012 and no contradictory Non-Goal
