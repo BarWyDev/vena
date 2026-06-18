@@ -1,0 +1,26 @@
+{
+  "name": "@vena/code-review",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-powered code review tooling built on the AI SDK + OpenRouter.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx --env-file=.env src/index.ts",
+    "dev": "tsx --env-file=.env watch src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@openrouter/ai-sdk-provider": "^2.9.1",
+    "ai": "^6.0.206",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

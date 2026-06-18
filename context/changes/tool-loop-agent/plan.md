@@ -405,19 +405,19 @@ switch from `reviewCode({ diff })` to `createReviewer().review(diff)`.
 
 #### Automated
 
-- [x] 1.1 Type checking passes: `npm run typecheck`
-- [x] 1.2 New files exist: `src/schema.ts`, `src/provider.ts`, `src/prompt.ts`
+- [x] 1.1 Type checking passes: `npm run typecheck` — 6c83109
+- [x] 1.2 New files exist: `src/schema.ts`, `src/provider.ts`, `src/prompt.ts` — 6c83109
 
 #### Manual
 
-- [x] 1.3 REVIEW_INSTRUCTIONS covers bugs + convention/codebase consistency + tool usage
+- [x] 1.3 REVIEW_INSTRUCTIONS covers bugs + convention/codebase consistency + tool usage — 6c83109
 
 ### Phase 2: Read-File Tool
 
 #### Automated
 
-- [ ] 2.1 Type checking passes: `npm run typecheck`
-- [ ] 2.2 File exists: `src/tools/read-file.ts`
+- [x] 2.1 Type checking passes: `npm run typecheck`
+- [x] 2.2 File exists: `src/tools/read-file.ts`
 
 #### Manual
 
@@ -428,12 +428,12 @@ switch from `reviewCode({ diff })` to `createReviewer().review(diff)`.
 
 #### Automated
 
-- [ ] 3.1 Type checking passes: `npm run typecheck`
-- [ ] 3.2 `src/agent.ts` exists; `createReviewer` + `ReviewerConfig` exported
+- [x] 3.1 Type checking passes: `npm run typecheck`
+- [x] 3.2 `src/agent.ts` exists; `createReviewer` + `ReviewerConfig` exported
 
 #### Manual
 
-- [ ] 3.3 `createReviewer().review(sampleDiff)` returns a valid ReviewResult
+- [x] 3.3 `createReviewer().review(sampleDiff)` returns a valid ReviewResult
 
 ### Phase 4: Barrel, Demo & Docs
 
