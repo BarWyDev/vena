@@ -439,11 +439,11 @@ switch from `reviewCode({ diff })` to `createReviewer().review(diff)`.
 
 #### Automated
 
-- [x] 4.1 Type checking passes: `npm run typecheck`
-- [x] 4.2 `src/demo.ts` + barrel `src/index.ts` exist; old `main()`/`reviewCode` removed from index
-- [x] 4.3 `package.json` start/dev scripts point at `src/demo.ts`
+- [x] 4.1 Type checking passes: `npm run typecheck` — e18ba98
+- [x] 4.2 `src/demo.ts` + barrel `src/index.ts` exist; old `main()`/`reviewCode` removed from index — e18ba98
+- [x] 4.3 `package.json` start/dev scripts point at `src/demo.ts` — e18ba98
 
 #### Manual
 
-- [x] 4.4 `npm start` prints a validated ReviewResult
-- [x] 4.5 README examples match the exported factory API
+- [x] 4.4 `npm start` prints a validated ReviewResult — e18ba98
+- [x] 4.5 README examples match the exported factory API — e18ba98
