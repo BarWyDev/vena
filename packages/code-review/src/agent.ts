@@ -27,11 +27,13 @@ export function createReviewer(config?: ReviewerConfig) {
     stopWhen: stepCountIs(maxSteps),
   });
 
+  // ToolLoopAgent.generate() starts a fresh multi-step loop per call; no
+  // conversation history is carried between calls, so reusing the instance is safe.
   return {
     agent,
     async review(diff: string): Promise<ReviewResult> {
       const { output } = await agent.generate({ prompt: buildReviewPrompt(diff) });
-      return output as ReviewResult;
+      return ReviewResult.parse(output);
     },
   };
 }
