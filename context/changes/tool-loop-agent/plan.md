@@ -428,22 +428,22 @@ switch from `reviewCode({ diff })` to `createReviewer().review(diff)`.
 
 #### Automated
 
-- [x] 3.1 Type checking passes: `npm run typecheck`
-- [x] 3.2 `src/agent.ts` exists; `createReviewer` + `ReviewerConfig` exported
+- [x] 3.1 Type checking passes: `npm run typecheck` — c48b426
+- [x] 3.2 `src/agent.ts` exists; `createReviewer` + `ReviewerConfig` exported — c48b426
 
 #### Manual
 
-- [x] 3.3 `createReviewer().review(sampleDiff)` returns a valid ReviewResult
+- [x] 3.3 `createReviewer().review(sampleDiff)` returns a valid ReviewResult — c48b426
 
 ### Phase 4: Barrel, Demo & Docs
 
 #### Automated
 
-- [ ] 4.1 Type checking passes: `npm run typecheck`
-- [ ] 4.2 `src/demo.ts` + barrel `src/index.ts` exist; old `main()`/`reviewCode` removed from index
-- [ ] 4.3 `package.json` start/dev scripts point at `src/demo.ts`
+- [x] 4.1 Type checking passes: `npm run typecheck`
+- [x] 4.2 `src/demo.ts` + barrel `src/index.ts` exist; old `main()`/`reviewCode` removed from index
+- [x] 4.3 `package.json` start/dev scripts point at `src/demo.ts`
 
 #### Manual
 
-- [ ] 4.4 `npm start` prints a validated ReviewResult
-- [ ] 4.5 README examples match the exported factory API
+- [x] 4.4 `npm start` prints a validated ReviewResult
+- [x] 4.5 README examples match the exported factory API
