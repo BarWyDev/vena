@@ -1,0 +1,87 @@
+name: AI Code Review
+description: Runs the Vena AI code reviewer on a pull request and posts results as a PR comment.
+
+inputs:
+  pull-number:
+    description: PR number for gh pr diff and comment/label calls
+    required: true
+  github-token:
+    description: GitHub token passed to GH CLI and github-script steps
+    required: true
+  openrouter-api-key:
+    description: OpenRouter API key forwarded to the reviewer
+    required: true
+  pr-title:
+    description: PR title forwarded to the reviewer
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Install code-review dependencies
+      shell: bash
+      working-directory: packages/code-review
+      run: npm ci
+
+    - name: Fetch PR diff
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: gh pr diff ${{ inputs.pull-number }} > /tmp/pr.diff
+
+    - name: Run AI reviewer
+      shell: bash
+      env:
+        OPENROUTER_API_KEY: ${{ inputs.openrouter-api-key }}
+        PR_TITLE: ${{ inputs.pr-title }}
+      run: |
+        $GITHUB_WORKSPACE/packages/code-review/node_modules/.bin/tsx \
+          $GITHUB_WORKSPACE/.github/actions/ai-code-review/run-review.ts
+
+    - name: Post or update PR comment
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const body = fs.readFileSync('/tmp/review-comment.md', 'utf8');
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: ${{ inputs.pull-number }},
+          });
+          const existing = comments.find(c => c.body && c.body.includes('AI Code Review'));
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body,
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ inputs.pull-number }},
+              body,
+            });
+          }
+
+    - name: Apply result label
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const result = JSON.parse(fs.readFileSync('/tmp/review-result.json', 'utf8'));
+          await github.rest.issues.addLabels({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: ${{ inputs.pull-number }},
+            labels: [result.label],
+          });
