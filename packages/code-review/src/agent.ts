@@ -1,8 +1,8 @@
-import { Output, ToolLoopAgent, stepCountIs } from 'ai';
-import { createProvider, DEFAULT_MODEL } from './provider.js';
-import { REVIEW_INSTRUCTIONS, buildReviewPrompt } from './prompt.js';
-import { ReviewResult } from './schema.js';
-import { createReadFileTool } from './tools/read-file.js';
+import { Output, ToolLoopAgent, stepCountIs } from "ai";
+import { createProvider, DEFAULT_MODEL } from "./provider.js";
+import { REVIEW_INSTRUCTIONS, buildReviewPrompt } from "./prompt.js";
+import { ReviewResult } from "./schema.js";
+import { createReadFileTool } from "./tools/read-file.js";
 
 export interface ReviewerConfig {
   model?: string;
@@ -12,12 +12,7 @@ export interface ReviewerConfig {
 }
 
 export function createReviewer(config?: ReviewerConfig) {
-  const {
-    model = DEFAULT_MODEL,
-    provider = createProvider(),
-    rootDir = process.cwd(),
-    maxSteps = 10,
-  } = config ?? {};
+  const { model = DEFAULT_MODEL, provider = createProvider(), rootDir = process.cwd(), maxSteps = 10 } = config ?? {};
 
   const agent = new ToolLoopAgent({
     model: provider(model),

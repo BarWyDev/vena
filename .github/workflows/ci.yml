@@ -16,6 +16,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm ci --prefix packages/code-review
       - run: npx astro sync
       - run: npm run lint
       - run: npx supabase start

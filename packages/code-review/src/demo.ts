@@ -1,4 +1,4 @@
-import { createReviewer } from './agent.js';
+import { createReviewer } from "./agent.js";
 
 const sampleDiff = `--- a/src/sum.ts
 +++ b/src/sum.ts
