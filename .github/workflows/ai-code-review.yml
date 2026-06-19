@@ -47,6 +47,8 @@ jobs:
               }).catch(() => {});
             }
 
+      - uses: actions/checkout@v4
+
       - name: Run AI code review
         uses: ./.github/actions/ai-code-review
         with:
