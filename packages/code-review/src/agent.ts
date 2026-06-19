@@ -31,8 +31,8 @@ export function createReviewer(config?: ReviewerConfig) {
   // conversation history is carried between calls, so reusing the instance is safe.
   return {
     agent,
-    async review(diff: string): Promise<ReviewResult> {
-      const { output } = await agent.generate({ prompt: buildReviewPrompt(diff) });
+    async review(diff: string, prTitle?: string): Promise<ReviewResult> {
+      const { output } = await agent.generate({ prompt: buildReviewPrompt(diff, prTitle) });
       return ReviewResult.parse(output);
     },
   };
