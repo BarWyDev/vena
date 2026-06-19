@@ -1,0 +1,56 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  ai-code-review:
+    runs-on: ubuntu-latest
+    if: github.event.action != 'labeled' || github.event.label.name == 'ai-cr:review'
+    steps:
+      - name: Provision labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const labels = [
+              { name: 'ai-cr:passed', color: '0e8a16', description: 'AI code review passed' },
+              { name: 'ai-cr:failed', color: 'd93f0b', description: 'AI code review failed' },
+              { name: 'ai-cr:review', color: 'e4e669', description: 'Trigger AI code review re-run' },
+            ];
+            for (const label of labels) {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ...label,
+              }).catch(() => {});
+            }
+
+      - name: Clean up stale review labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const labels = ['ai-cr:passed', 'ai-cr:failed', 'ai-cr:review'];
+            for (const name of labels) {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                name,
+              }).catch(() => {});
+            }
+
+      - name: Run AI code review
+        uses: ./.github/actions/ai-code-review
+        with:
+          pull-number: ${{ github.event.pull_request.number }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          openrouter-api-key: ${{ secrets.OPENROUTER_API_KEY }}
+          pr-title: ${{ github.event.pull_request.title }}

@@ -384,21 +384,21 @@ No data migrations. The schema change (adding optional `criterion` field to `Rev
 
 #### Automated
 
-- [x] 1.1 `npm run lint` passes inside `packages/code-review/`
-- [x] 1.2 `npx tsc --noEmit` (or equivalent) passes inside `packages/code-review/`
-- [x] 1.3 `npm start` (demo) completes without runtime errors
+- [x] 1.1 `npm run lint` passes inside `packages/code-review/` — ca43d6a
+- [x] 1.2 `npx tsc --noEmit` (or equivalent) passes inside `packages/code-review/` — ca43d6a
+- [x] 1.3 `npm start` (demo) completes without runtime errors — ca43d6a
 
 #### Manual
 
-- [x] 1.4 Demo output includes `criterion` field on findings matching one of the five enum values
-- [x] 1.5 Prompt visibly references all five criterion keys
+- [x] 1.4 Demo output includes `criterion` field on findings matching one of the five enum values — ca43d6a
+- [x] 1.5 Prompt visibly references all five criterion keys — ca43d6a
 
 ### Phase 2: Composite Action
 
 #### Automated
 
-- [ ] 2.1 Runner script has no TypeScript errors (`tsx --noEmit` or `tsc`)
-- [ ] 2.2 `action.yml` YAML is structurally valid
+- [x] 2.1 Runner script has no TypeScript errors (`tsx --noEmit` or `tsc`)
+- [x] 2.2 `action.yml` YAML is structurally valid
 
 #### Manual
 
@@ -409,7 +409,7 @@ No data migrations. The schema change (adding optional `criterion` field to `Rev
 
 #### Automated
 
-- [ ] 3.1 Workflow YAML passes `actionlint` or equivalent validation
+- [x] 3.1 Workflow YAML passes `actionlint` or equivalent validation — YAML valid (python yaml / manual review; actionlint not installed)
 - [ ] 3.2 `OPENROUTER_API_KEY` secret added to repository settings
 
 #### Manual
