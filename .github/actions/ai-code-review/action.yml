@@ -28,11 +28,11 @@ runs:
       working-directory: packages/code-review
       run: npm ci
 
-    - name: Fetch PR diff
+    - name: Fetch commit diff
       shell: bash
-      env:
-        GH_TOKEN: ${{ inputs.github-token }}
-      run: gh pr diff ${{ inputs.pull-number }} > /tmp/pr.diff
+      run: |
+        git fetch origin refs/pull/${{ inputs.pull-number }}/head --depth=2
+        git diff FETCH_HEAD^..FETCH_HEAD > /tmp/pr.diff
 
     - name: Run AI reviewer
       shell: bash
