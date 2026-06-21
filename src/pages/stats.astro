@@ -1,10 +1,18 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { createClient } from "@/lib/supabase";
 
 const user = Astro.locals.user;
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+let donationCount = 0;
+if (supabase && user) {
+  const { data } = await supabase.from("donations").select("id").eq("user_id", user.id);
+  donationCount = data?.length ?? 0;
+}
 ---
 
 <Layout title="Statystyki">
   <h1>Statystyki donacji</h1>
-  <p>Użytkownik: {user?.email}</p>
+  <p>Łączna liczba donacji: {donationCount}</p>
 </Layout>
