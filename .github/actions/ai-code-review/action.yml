@@ -30,7 +30,9 @@ runs:
 
     - name: Fetch commit diff
       shell: bash
-      run: git diff HEAD^..HEAD > /tmp/pr.diff
+      run: |
+        git fetch origin refs/pull/${{ inputs.pull-number }}/head --depth=2
+        git diff FETCH_HEAD^..FETCH_HEAD > /tmp/pr.diff
 
     - name: Run AI reviewer
       shell: bash
