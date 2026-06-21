@@ -21,5 +21,5 @@ export const GET: APIRoute = async (context) => {
     return context.redirect(`/donations?error=${encodeURIComponent(error.message)}`);
   }
 
-  return Response.json({ count: donations?.length ?? 0 });
+  return Response.json({ count: donations.length });
 };
