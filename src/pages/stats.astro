@@ -1,16 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { createClient } from "@/lib/supabase";
 
-// BAD: calls supabase.auth.getUser() directly inside a page (should read context.locals.user)
-const supabase = createClient(Astro.request.headers, Astro.cookies);
-const { data: { user } } = await supabase.auth.getUser();
-
-if (!user) {
-  return Astro.redirect("/auth/signin");
-}
+const user = Astro.locals.user;
 ---
 <Layout title="Statystyki">
   <h1>Statystyki donacji</h1>
-  <p>Użytkownik: {user.email}</p>
+  <p>Użytkownik: {user?.email}</p>
 </Layout>

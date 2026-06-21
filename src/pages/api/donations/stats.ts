@@ -1,33 +1,15 @@
 import type { APIRoute } from "astro";
-import { createServerClient, parseCookieHeader } from "@supabase/ssr";
+import { createClient } from "@/lib/supabase";
 
 export const GET: APIRoute = async (context) => {
-  // BAD: uses process.env instead of astro:env/server
-  const supabaseUrl = process.env.SUPABASE_URL!;
-  const supabaseKey = process.env.SUPABASE_KEY!;
+  const supabase = createClient(context.request.headers, context.cookies);
+  if (!supabase) {
+    return context.redirect(`/donations?error=${encodeURIComponent("Błąd konfiguracji serwera")}`);
+  }
 
-  // BAD: no null-check — will crash when env vars are absent
-  const supabase = createServerClient(supabaseUrl, supabaseKey, {
-    cookies: {
-      getAll() {
-        return parseCookieHeader(context.request.headers.get("Cookie") ?? "").map(
-          ({ name, value }) => ({ name, value: value ?? "" })
-        );
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          context.cookies.set(name, value, options);
-        });
-      },
-    },
-  });
-
-  // BAD: calls supabase.auth.getUser() inside an API route (should use context.locals.user)
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-  if (authError || !user) {
-    // BAD: returns JSON error object instead of redirect
-    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  const user = context.locals.user;
+  if (!user) {
+    return context.redirect("/auth/signin");
   }
 
   const { data: donations, error } = await supabase
@@ -36,8 +18,7 @@ export const GET: APIRoute = async (context) => {
     .eq("user_id", user.id);
 
   if (error) {
-    // BAD: returns JSON error object instead of redirect
-    return Response.json({ error: error.message }, { status: 500 });
+    return context.redirect(`/donations?error=${encodeURIComponent(error.message)}`);
   }
 
   return Response.json({ count: donations?.length ?? 0 });
